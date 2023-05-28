@@ -2,7 +2,6 @@
   "name": "page-reducer",
   "version": "0.0.1",
   "description": "Reduce a webpage to find the smallest test case",
-  "private": true,
   "bin": "dist/index.js",
   "type": "module",
   "author": "thislooksfun <tlf@thislooks.fun> (https://thislooks.fun)",
