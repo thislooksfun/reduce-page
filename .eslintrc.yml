@@ -1,0 +1,110 @@
+root: true
+
+env:
+  node: true
+
+reportUnusedDisableDirectives: true
+
+plugins:
+  - comment-length
+  - deprecation
+  - eslint-comments
+  - import
+  - promise
+  - simple-import-sort
+  - sonarjs
+  - unicorn
+
+extends:
+  - eslint:recommended
+  - plugin:comment-length/recommended
+  - plugin:eslint-comments/recommended
+  - plugin:import/recommended
+  - plugin:sonarjs/recommended
+  - plugin:unicorn/recommended
+  - plugin:prettier/recommended
+
+rules:
+  comment-length/limit-multi-line-comments: error
+  comment-length/limit-single-line-comments: error
+  deprecation/deprecation: error
+  import/first: error
+  import/no-default-export: error
+  import/no-duplicates: error
+  import/no-named-as-default-member: error
+  import/no-named-as-default: error
+  import/no-unresolved: off
+  promise/prefer-await-to-callbacks: error
+  promise/prefer-await-to-then: error
+  simple-import-sort/exports: error
+  simple-import-sort/imports:
+    - error
+    - groups:
+        - ["\\u0000$"] # Types
+        - ["^\\u0000"] # Side-effects
+        - ["^@?\\w"] # Packages
+        - ["^"] # All other packages
+        - ["^\\."] # Relative imports
+  spaced-comment:
+    - error
+    - always
+    - block:
+        balanced: true
+  unicorn/filename-case:
+    - error
+    - case: kebabCase
+  # The node: protocol is only supported in node 16+, and snoots currently
+  # supports node 14+. Once node 14 support has been dropped this rule should be
+  # re-enabled.
+  unicorn/prefer-node-protocol: "off"
+  unicorn/prevent-abbreviations:
+    - error
+    - replacements:
+        desc:
+          description: true
+        sr:
+          subreddit: true
+  unicorn/switch-case-braces: [error, avoid]
+
+overrides:
+  - files: ["**/*.ts"]
+    parser: "@typescript-eslint/parser"
+    parserOptions:
+      project:
+        - "./tsconfig.json"
+    plugins:
+      - "@typescript-eslint"
+    extends:
+      - plugin:@typescript-eslint/recommended
+      - plugin:@typescript-eslint/recommended-requiring-type-checking
+      - plugin:import/typescript
+    rules:
+      "@typescript-eslint/consistent-type-exports": error
+      "@typescript-eslint/consistent-type-imports": error
+      "@typescript-eslint/naming-convention":
+        - error
+        - selector: [class, interface, typeAlias, typeParameter]
+          format: [PascalCase]
+        - selector: default
+          format: [camelCase]
+          leadingUnderscore: allow
+      "@typescript-eslint/no-explicit-any": error
+      "@typescript-eslint/no-inferrable-types": "off"
+      "@typescript-eslint/no-non-null-assertion": "off"
+      "@typescript-eslint/no-unused-vars": "off"
+      "@typescript-eslint/require-await": "off"
+      # This is already covered by @typescript-eslint/no-this-alias.
+      unicorn/no-this-assignment: "off"
+
+  - files: ["**/__tests__/**/*.ts"]
+    plugins:
+      - jest
+    extends:
+      - plugin:jest/recommended
+    rules:
+      jest/expect-expect:
+        - "error"
+        - assertFunctionNames:
+            - expect
+            - n.done
+      sonarjs/no-duplicate-string: off

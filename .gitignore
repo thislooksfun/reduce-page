@@ -1,0 +1,8 @@
+/coverage
+/dist
+/docs
+/types
+.DS_Store
+node_modules
+.env
+*.tgz

@@ -1,0 +1,27 @@
+{
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/*", "dist/*"],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+
+    // enable latest features
+    "lib": ["esnext"],
+    "module": "esnext",
+    "target": "esnext",
+
+    "moduleResolution": "nodenext",
+
+    "allowJs": true, // allow importing `.js` from `.ts`
+    "esModuleInterop": true, // allow default imports for CommonJS modules
+
+    // strictest code
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  }
+}
