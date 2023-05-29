@@ -1,4 +1,4 @@
-# page-reducer
+# reduce-page
 
 Semi-automatically reduce a saved HTML file to find the minimum required to reproduce some result.
 
@@ -10,8 +10,15 @@ This project is still in development. Things might be unstable.
 
 ## Usage
 
-This project is not yet published on npm, though I plan for that to change relatively soon. In the mean time, to use this just run
+You can either run the package through `npx`:
 
 ```sh
-npx github:thislooksfun/page-reducer <path/to/page.html>
+npx reduce-page <path/to/page.html>
+```
+
+Or you can install it globally:
+
+```sh
+npm i -g reduce-page
+reduce-page <path/to/page.html>
 ```
