@@ -23,7 +23,6 @@ jobs:
           bump-minor-pre-major: true
           bump-patch-for-minor-pre-major: true
           prerelease: true
-          release-as: "0.0.1"
 
   npm-publish:
     runs-on: ubuntu-latest
