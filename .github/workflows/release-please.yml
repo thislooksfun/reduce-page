@@ -42,21 +42,21 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-  tag-published:
-    runs-on: ubuntu-latest
-    needs: npm-publish
-    permissions:
-      pull-requests: write
-    steps:
-      - uses: actions/github-script@v6
-        with:
-          script: |
-            const prs = JSON.parse("${{ needs.release-please.outputs.prs }}")
-            for (const pr of prs) {
-              github.rest.issues.addLabels({
-                issue_number: pr.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                labels: ["autorelease: published"]
-              })
-            }
+  # tag-published:
+  #   runs-on: ubuntu-latest
+  #   needs: npm-publish
+  #   permissions:
+  #     pull-requests: write
+  #   steps:
+  #     - uses: actions/github-script@v6
+  #       with:
+  #         script: |
+  #           const prs = JSON.parse("${{ needs.release-please.outputs.prs }}")
+  #           for (const pr of prs) {
+  #             github.rest.issues.addLabels({
+  #               issue_number: pr.number,
+  #               owner: context.repo.owner,
+  #               repo: context.repo.repo,
+  #               labels: ["autorelease: published"]
+  #             })
+  #           }
