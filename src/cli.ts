@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import type { ReductionStep } from "./types.js";
 import type { FormatInputPathObject } from "node:path";
 
