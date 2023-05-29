@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.2](https://github.com/thislooksfun/page-reducer/compare/v0.0.1...v0.0.2) (2023-05-29)
+
+
+### Bug Fixes
+
+* add shebang ([5c12e12](https://github.com/thislooksfun/page-reducer/commit/5c12e124749e7c77de7abf4b03f92649bfd57129))
+
 ## 0.0.1 (2023-05-28)
 
 
