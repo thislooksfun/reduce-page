@@ -24,5 +24,8 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true
+  },
+  "ts-node": {
+    "esm": true
   }
 }
