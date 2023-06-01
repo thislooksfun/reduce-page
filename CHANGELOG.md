@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.0](https://github.com/thislooksfun/reduce-page/compare/v0.0.2...v0.1.0) (2023-06-01)
+
+
+### Features
+
+* add a tree trimmer stage ([15b40f8](https://github.com/thislooksfun/reduce-page/commit/15b40f8ffc1c5d874f2dbb055fa130d59039bdbb))
+* rewrite into an interactive cli ([36a231f](https://github.com/thislooksfun/reduce-page/commit/36a231f323696979fcde5dfa4b217a4631b05f57))
+
+
+### Bug Fixes
+
+* remove debug log ([40ceeab](https://github.com/thislooksfun/reduce-page/commit/40ceeab345ef01bcfb7cc49288e8ce8c6ae56a76))
+
+
+### Documentation
+
+* add demo gif to readme ([a8e407f](https://github.com/thislooksfun/reduce-page/commit/a8e407f764b3081497dba391a3e3eda716155ed9))
+
 ## [0.0.2](https://github.com/thislooksfun/reduce-page/compare/v0.0.1...v0.0.2) (2023-05-29)
 
 
