@@ -1,6 +1,6 @@
 import type { Document, Element, ParentNode } from "../../tree-adapter.js";
 
-import { isElementNode, isParentNode } from "../../tree-adapter.js";
+import { isParentNode, treeAdapter } from "../../tree-adapter.js";
 import { parseHTML } from "../../util.js";
 
 export type ExtractorResultDetailed = {
@@ -48,7 +48,7 @@ const getSelectorsInElement = (element: Element): ExtractorResultDetailed => {
   const result = makeEmptyResult();
   result.tags.push(element.tagName);
 
-  for (const { name, value } of element.attrs) {
+  for (const { name, value } of treeAdapter.getAttrList(element)) {
     if (name === "class") {
       result.classes.push(...value.split(" "));
     } else if (name === "id") {
@@ -65,8 +65,8 @@ const getSelectorsInElement = (element: Element): ExtractorResultDetailed => {
 const getSelectorsInNodes = (node: ParentNode): ExtractorResultDetailed => {
   let result = makeEmptyResult();
 
-  for (const childNode of node.childNodes) {
-    if (isElementNode(childNode)) {
+  for (const childNode of treeAdapter.getChildNodes(node)) {
+    if (treeAdapter.isElementNode(childNode)) {
       result = mergedExtractorResults(result, getSelectorsInElement(childNode));
     }
     if (isParentNode(childNode)) {
