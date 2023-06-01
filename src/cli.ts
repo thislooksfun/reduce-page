@@ -2,59 +2,117 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable no-console */
 
-import type { ReductionStep } from "./types.js";
 import type { FormatInputPathObject } from "node:path";
 
-import assert from "node:assert";
+import chalk from "chalk";
 import { readFile, writeFile } from "node:fs/promises";
 import { format, parse } from "node:path";
 
+import { buildHelp } from "./help.js";
+import { acceptChar, stopKeyListener } from "./key-listener.js";
+import { PageReducer } from "./reducer.js";
 import { startServer } from "./server.js";
-import { removeUnusedCss } from "./stages/remove-css/remove-css.js";
-import { parseHTML, stringifyHTML } from "./util.js";
 
 const filepath = process.argv[2] ?? "";
 if (!filepath) {
-  console.log("Usage: reduce-page <file>");
+  console.log(chalk.red("Usage: reduce-page <file>"));
   process.exit(1);
 }
 
-console.log("Reducing page", filepath);
+console.log("Reducing page", chalk.bold(filepath));
 const file = await readFile(filepath, { encoding: "utf8" });
-const document = parseHTML(file);
+const reducer = new PageReducer(file);
+
+function logAction(message: string) {
+  console.log(chalk.grey(`> ${message}`));
+}
+
+function logError(message: string) {
+  console.log(chalk.red(`> ${message}`));
+  process.stdout.write("\u0007"); // Bell
+}
+
+function logSuccess(message: string) {
+  console.log(chalk.green(`> ${message}`));
+  process.stdout.write("\u0007"); // Bell
+}
 
 async function saveReduction() {
   const fileParts: FormatInputPathObject = parse(filepath);
   delete fileParts.base;
   fileParts.name += ".reduced";
   const outfile = format(fileParts);
-  console.log(`Saving reduced page to ${outfile}`);
-  await writeFile(outfile, stringifyHTML(document));
+  logAction(`Saving reduced page to ${chalk.bold(outfile)}`);
+  await writeFile(outfile, reducer.stringify());
 }
 
-const { stopServer } = await startServer(() => stringifyHTML(document));
-assert.equal(document.nodeName, "#document");
+const { refresh, stopServer } = await startServer(() => reducer.stringify());
+console.log(
+  chalk.yellow(`Reduction server listening at ${chalk.bold("localhost:3000")}`)
+);
 
-async function performStep(step: ReductionStep): Promise<void> {
-  const result = await step(document);
-  // TODO: Refresh page & ask if still broken
-  result.apply();
+let isFirst = true;
+
+// eslint-disable-next-line no-constant-condition
+runloop: while (true) {
+  process.stdout.write(`What would you like to do? `);
+
+  if (isFirst) {
+    process.stdout.write(chalk.grey(`(press '${chalk.bold("?")}' for help) `));
+    isFirst = false;
+  }
+
+  const key = await acceptChar();
+  console.log();
+
+  switch (key) {
+    case "c":
+    case "n":
+      if (reducer.canContinue()) {
+        logAction("Continuing");
+        await reducer.continue();
+        refresh();
+      } else {
+        logSuccess("Reduction finished!");
+      }
+      break;
+    case "d":
+      if (reducer.canDiscard()) {
+        logAction("Discarding previous attempt");
+        await reducer.discard();
+        refresh();
+      } else {
+        logError("Can't discard");
+      }
+      break;
+    case "u":
+      if (reducer.canUndo()) {
+        logAction("Undoing last step");
+        await reducer.undo();
+        refresh();
+      } else {
+        logError("Can't undo");
+      }
+      break;
+    case "s":
+      await saveReduction();
+      break;
+    case "r":
+      logAction("Refreshing all connected browsers");
+      refresh();
+      break;
+    case "q":
+    case "\u0003": // ctrl+c
+      await saveReduction();
+      logAction("Exiting...");
+      stopKeyListener();
+      await stopServer();
+      break runloop;
+    case "/": // In case they don't hold shift
+    case "?":
+      console.log(`\n${buildHelp()}\n`);
+      break;
+    default:
+      logError(`Unsupported command '${chalk.bold(key)}'`);
+  }
 }
-
-// TODO: stage 1: remove unnecessary elements
-// TODO: stage 2: re-parent elements
-
-// Stage 3: remove unused CSS
-await performStep(removeUnusedCss);
-
-// TODO: stage 4: simplify CSS selectors
-//                4.1: try removing selector blocks
-//                4.2: try removing rules
-//                4.3: clean up any empty selectors
-// TODO: stage 5: consolidate CSS selectors (i.e. if we get down to a single
-//                `div` with 20 classes, join them into one class)
-// TODO: repeat stages 1-5 until no changes are made
-
-// Reduction is finished! Shut down the server and save the result.
-await stopServer();
-await saveReduction();

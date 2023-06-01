@@ -1,12 +1,15 @@
-import type { Document } from "./tree-adapter.js";
-
 export type Awaitable<T> = T | PromiseLike<T>;
 
-export type ReductionStepResult = {
-  apply: () => void;
-  undo: () => void;
-};
+export type Maybe<T> = T | undefined;
 
-export type ReductionStep = (
-  document: Document
-) => Awaitable<ReductionStepResult>;
+export interface Undoable {
+  undo: () => Awaitable<void>;
+}
+
+export interface Actionable extends Required<Undoable> {
+  canContinue: () => boolean;
+  continue: () => Awaitable<void>;
+  canDiscard: () => boolean;
+  discard: () => Awaitable<void>;
+  canUndo: () => boolean;
+}

@@ -5,7 +5,7 @@ import type {
   NodeFromName,
   ParentNode,
 } from "./tree-adapter.js";
-import type { Awaitable } from "./types.js";
+import type { Awaitable, Maybe } from "./types.js";
 
 import { parse, serialize } from "parse5";
 import stripBom from "strip-bom";
@@ -25,19 +25,19 @@ export function stringifyHTML(document: Document): string {
   return serialize(document, { treeAdapter });
 }
 
-export async function visitChildren(
+export async function visitDescendants(
   node: ParentNode,
   visit: (node: Node) => Awaitable<void>
 ): Promise<void> {
   for (const childNode of node.childNodes) {
     await visit(childNode);
     if (isParentNode(childNode)) {
-      await visitChildren(childNode, visit);
+      await visitDescendants(childNode, visit);
     }
   }
 }
 
-export async function visitChildrenOfType<
+export async function visitDescendantsOfType<
   NodeName extends string,
   NodeType = NodeFromName<NodeName>
 >(
@@ -45,22 +45,30 @@ export async function visitChildrenOfType<
   node: ParentNode,
   visit: (node: NodeType) => Awaitable<void>
 ): Promise<void> {
-  await visitChildren(node, async (visitedNode) => {
+  await visitDescendants(node, async (visitedNode) => {
     if (visitedNode.nodeName === type) {
       await visit(visitedNode as NodeType);
     }
   });
 }
 
-export async function findChildrenOfType<
+export async function findDescendantsOfType<
   NodeName extends string,
   NodeType = NodeFromName<NodeName>
 >(type: NodeName, node: ParentNode): Promise<NodeType[]> {
   const nodes: NodeType[] = [];
-  await visitChildrenOfType<NodeName, NodeType>(type, node, (foundNode) => {
+  await visitDescendantsOfType<NodeName, NodeType>(type, node, (foundNode) => {
     nodes.push(foundNode);
   });
   return nodes;
+}
+
+export function findChildOfType<
+  NodeName extends string,
+  NodeType = NodeFromName<NodeName>
+>(name: NodeName, node: ParentNode): Maybe<NodeType> {
+  const match = node.childNodes.find((c) => c.nodeName === name);
+  return match as Maybe<NodeType>;
 }
 
 function isTextParent(node: ParentNode): boolean {

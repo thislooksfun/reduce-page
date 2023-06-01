@@ -21,6 +21,7 @@
     "lint:fix:prettier": "prettier --write \"**/*\""
   },
   "dependencies": {
+    "chalk": "5.2.0",
     "debug": "4.3.4",
     "express": "4.18.2",
     "livereload": "0.9.3",
