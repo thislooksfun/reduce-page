@@ -1,7 +1,9 @@
 import { RemoveUnusedCssStage } from "./remove-css/stage.js";
+import { TreeTrimmerStage } from "./tree-trimmer.js";
 
 export const allStages = [
-  // FIXME: Stage 1: Bisect-remove all unnecessary elements
+  // Stage 1: Bisect-remove all unnecessary elements
+  TreeTrimmerStage,
 
   // FIXME: Stage 2: Try removing intermediate elements
 

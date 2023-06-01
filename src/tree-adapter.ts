@@ -12,6 +12,9 @@ export interface BaseNode {
    * Comment source code location info. Available if location info is enabled.
    */
   sourceCodeLocation?: Token.Location | null;
+
+  /** Whether or not the node should be ignored when walking the AST. */
+  ignored: boolean;
 }
 
 export interface NodeWithChildren extends BaseNode {
@@ -143,6 +146,7 @@ export function createTextNode(value: string): TextNode {
     nodeName: "#text",
     value,
     parentNode: null,
+    ignored: false,
   };
 }
 
@@ -153,6 +157,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
       nodeName: "#document",
       mode: html.DOCUMENT_MODE.NO_QUIRKS,
       childNodes: [],
+      ignored: false,
     };
   },
 
@@ -160,6 +165,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
     return {
       nodeName: "#document-fragment",
       childNodes: [],
+      ignored: false,
     };
   },
 
@@ -175,6 +181,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
       namespaceURI,
       childNodes: [],
       parentNode: null,
+      ignored: false,
     };
   },
 
@@ -183,6 +190,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
       nodeName: "#comment",
       data,
       parentNode: null,
+      ignored: false,
     };
   },
 
@@ -235,6 +243,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
         publicId,
         systemId,
         parentNode: null,
+        ignored: false,
       };
       treeAdapter.appendChild(document, node);
     }
@@ -303,7 +312,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
   },
 
   getChildNodes(node: ParentNode): ChildNode[] {
-    return node.childNodes;
+    return node.childNodes.filter((c) => !c.ignored);
   },
 
   getParentNode(node: ChildNode): null | ParentNode {
