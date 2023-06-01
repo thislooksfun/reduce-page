@@ -4,6 +4,8 @@ Semi-automatically reduce a saved HTML file to find the minimum required to repr
 
 This project was inspired by [Andreas Kling](https://www.youtube.com/@awesomekling)'s Browser Hacking series, though it can be used by others as well.
 
+![demo of v0.1.0](media/demo_0-1-0.gif)
+
 # :warning: WARNING :warning:
 
 This project is still in development. Things might be unstable.
