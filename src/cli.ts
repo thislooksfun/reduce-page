@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable no-console */
 
 import type { ReductionStep } from "./types.js";
 import type { FormatInputPathObject } from "node:path";

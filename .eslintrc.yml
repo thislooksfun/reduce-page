@@ -34,6 +34,7 @@ rules:
   import/no-named-as-default-member: error
   import/no-named-as-default: error
   import/no-unresolved: off
+  no-console: error
   promise/prefer-await-to-callbacks: error
   promise/prefer-await-to-then: error
   simple-import-sort/exports: error
