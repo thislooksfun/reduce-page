@@ -17,6 +17,7 @@
 
     // strictest code
     "strict": true,
+    "noUncheckedIndexedAccess": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "noImplicitOverride": true,

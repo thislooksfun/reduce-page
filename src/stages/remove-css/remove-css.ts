@@ -30,12 +30,12 @@ export const removeUnusedCss: ReductionStep = async (document) => {
   return {
     apply: () => {
       for (const [index, result] of results.entries()) {
-        setInnerText(styleNodes[index], result.css);
+        setInnerText(styleNodes[index]!, result.css);
       }
     },
     undo: () => {
       for (const [index, styleNode] of styleNodes.entries()) {
-        setInnerText(styleNode, styleSheets[index]);
+        setInnerText(styleNode, styleSheets[index]!);
       }
     },
   };

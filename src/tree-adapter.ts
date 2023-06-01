@@ -299,7 +299,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
 
   // Tree traversing
   getFirstChild(node: ParentNode): null | ChildNode {
-    return node.childNodes[0];
+    return node.childNodes[0] ?? null;
   },
 
   getChildNodes(node: ParentNode): ChildNode[] {

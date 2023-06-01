@@ -11,11 +11,14 @@ import { startServer } from "./server.js";
 import { removeUnusedCss } from "./stages/remove-css/remove-css.js";
 import { parseHTML, stringifyHTML } from "./util.js";
 
-const filepath = process.argv[2];
+const filepath = process.argv[2] ?? "";
+if (!filepath) {
+  console.log("Usage: reduce-page <file>");
+  process.exit(1);
+}
+
 console.log("Reducing page", filepath);
-
 const file = await readFile(filepath, { encoding: "utf8" });
-
 const document = parseHTML(file);
 
 async function saveReduction() {
