@@ -78,7 +78,6 @@ const getSelectorsInNodes = (node: ParentNode): ExtractorResultDetailed => {
 };
 
 const extractHtml = (input: string | Document) => {
-  console.log("Extracting html from input type", typeof input);
   const document = typeof input === "string" ? parseHTML(input) : input;
   return getSelectorsInNodes(document);
 };
