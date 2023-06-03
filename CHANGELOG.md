@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/thislooksfun/reduce-page/compare/v0.1.0...v0.2.0) (2023-06-03)
+
+
+### Features
+
+* add a re-parenting stage ([b0d1ef0](https://github.com/thislooksfun/reduce-page/commit/b0d1ef00ac09e0ddb88954889bf48954082fa941))
+* display stage title when running reduction ([8c4fb57](https://github.com/thislooksfun/reduce-page/commit/8c4fb5712d9e733312398ab2736740a8e72c52b1))
+
 ## [0.1.0](https://github.com/thislooksfun/reduce-page/compare/v0.0.2...v0.1.0) (2023-06-01)
 
 
