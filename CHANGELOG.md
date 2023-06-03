@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.0](https://github.com/thislooksfun/reduce-page/compare/v0.2.0...v0.3.0) (2023-06-03)
+
+
+### Features
+
+* make 'h' also print help ([9a4dbb9](https://github.com/thislooksfun/reduce-page/commit/9a4dbb9469633554bb91606eb82844bf79f1e45d))
+* print help prompt after unsupported command error ([5b2862d](https://github.com/thislooksfun/reduce-page/commit/5b2862d755fe4ba176604a0295585b255ca22a09))
+
+
+### Bug Fixes
+
+* allow redoing undone single shot stages ([c3e4b9b](https://github.com/thislooksfun/reduce-page/commit/c3e4b9bbb94e10d5ad92c6614e15432e02e2ce1c))
+* don't crash if body is empty when re-parenting ([afbd92b](https://github.com/thislooksfun/reduce-page/commit/afbd92b55c9241224751da7cb2c24a54afdefd53))
+* properly compute the parent node ([a15e16d](https://github.com/thislooksfun/reduce-page/commit/a15e16d847ed99b5d783c0db3fb81df855d82b91))
+
 ## [0.2.0](https://github.com/thislooksfun/reduce-page/compare/v0.1.0...v0.2.0) (2023-06-03)
 
 
