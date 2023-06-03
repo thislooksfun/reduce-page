@@ -53,12 +53,14 @@ console.log(
 
 let isFirst = true;
 
+const helpPrompt = `press '${chalk.bold("h")}' for help`;
+
 // eslint-disable-next-line no-constant-condition
 runloop: while (true) {
   process.stdout.write(`What would you like to do? `);
 
   if (isFirst) {
-    process.stdout.write(chalk.grey(`(press '${chalk.bold("?")}' for help) `));
+    process.stdout.write(chalk.grey(`(${helpPrompt}) `));
     isFirst = false;
   }
 
@@ -116,6 +118,6 @@ runloop: while (true) {
       console.log(`\n${buildHelp()}\n`);
       break;
     default:
-      logError(`Unsupported command '${chalk.bold(key)}'`);
+      logError(`Unsupported command '${chalk.bold(key)}', ${helpPrompt}`);
   }
 }
