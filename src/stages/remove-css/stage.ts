@@ -17,7 +17,7 @@ export class RemoveUnusedCssStage extends OneShotReductionStage {
   public override readonly title = "Remove Unused CSS";
   private pc = new PurgeCSS();
 
-  protected override async buildContinueStep(): Promise<ReductionAction> {
+  protected override async buildReduction(): Promise<ReductionAction> {
     const styleNodes = await findDescendantsOfType("style", this.document);
     const styleSheets = styleNodes.map((styleNode) => getInnerText(styleNode));
 

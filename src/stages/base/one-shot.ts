@@ -17,9 +17,21 @@ export abstract class OneShotReductionStage extends ReductionStage {
     return this.didRun;
   }
 
-  public override async continue(): Promise<void> {
-    await super.continue();
-    this.didRun = true;
+  protected abstract buildReduction(): Awaitable<ReductionAction>;
+
+  protected override async buildContinueStep(): Promise<ReductionAction> {
+    const reduction = await this.buildReduction();
+
+    return {
+      apply: async () => {
+        await reduction.apply();
+        this.didRun = true;
+      },
+      undo: async () => {
+        this.didRun = false;
+        await reduction.undo();
+      },
+    };
   }
 
   protected override buildDiscardStep(): Awaitable<ReductionAction> {
@@ -30,8 +42,10 @@ export abstract class OneShotReductionStage extends ReductionStage {
         lastAction = this.getLastAction();
         assert.equal(lastAction.type, "continue");
         await lastAction.undo();
+        this.didRun = true;
       },
       undo: async () => {
+        this.didRun = false;
         await lastAction?.apply();
       },
     };
