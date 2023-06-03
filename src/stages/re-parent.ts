@@ -1,12 +1,12 @@
 import type { Document, ParentNode } from "../tree-adapter.js";
 import type { Maybe, Undoable } from "../types.js";
-import type { ReductionAction, TypedReductionAction } from "./base.js";
+import type { ReductionAction, TypedReductionAction } from "./base/types.js";
 
 import assert from "node:assert";
 
 import { isParentNode, treeAdapter } from "../tree-adapter.js";
 import { findChildOfType } from "../util.js";
-import { ReductionStage } from "./base.js";
+import { ReductionStage } from "./base/reduction-stage.js";
 
 function bypassableChildrenOf(node: ParentNode) {
   const children = treeAdapter.getChildNodes(node);

@@ -1,12 +1,12 @@
 import type { Document, Node } from "../tree-adapter.js";
 import type { Maybe, Undoable } from "../types.js";
-import type { ReductionAction, TypedReductionAction } from "./base.js";
+import type { ReductionAction, TypedReductionAction } from "./base/types.js";
 
 import assert from "node:assert";
 
 import { isParentNode, treeAdapter } from "../tree-adapter.js";
 import { findChildOfType } from "../util.js";
-import { ReductionStage } from "./base.js";
+import { ReductionStage } from "./base/reduction-stage.js";
 
 export class TreeTrimmerStage extends ReductionStage {
   public override readonly title = "Remove Unnecessary Elements";

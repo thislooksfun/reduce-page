@@ -1,4 +1,4 @@
-import type { ReductionStage } from "./stages/base.js";
+import type { ReductionStage } from "./stages/base/reduction-stage.js";
 import type { Document } from "./tree-adapter.js";
 import type { Actionable, Maybe } from "./types.js";
 

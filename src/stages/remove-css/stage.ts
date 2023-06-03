@@ -1,4 +1,4 @@
-import type { ReductionAction } from "../base.js";
+import type { ReductionAction } from "../base/types.js";
 
 import assert from "assert";
 import { PurgeCSS } from "purgecss";
@@ -8,7 +8,7 @@ import {
   getInnerText,
   setInnerText,
 } from "../../util.js";
-import { OneShotReductionStage } from "../base.js";
+import { OneShotReductionStage } from "../base/one-shot.js";
 import { extractHtml } from "./extractor.js";
 
 const htmlExtractor = { extensions: [".html"], extractor: extractHtml };

@@ -1,15 +1,8 @@
-import type { Document } from "../tree-adapter.js";
-import type { Actionable, Awaitable, Maybe, Undoable } from "../types.js";
+import type { Document } from "../../tree-adapter.js";
+import type { Actionable, Awaitable } from "../../types.js";
+import type { ReductionAction, TypedReductionAction } from "./types.js";
 
 import assert from "node:assert";
-
-export interface ReductionAction extends Undoable {
-  apply: () => Awaitable<void>;
-}
-
-export interface TypedReductionAction extends ReductionAction {
-  type: "continue" | "discard";
-}
 
 export abstract class ReductionStage implements Actionable {
   public abstract readonly title: string;
@@ -54,37 +47,4 @@ export abstract class ReductionStage implements Actionable {
 
   protected abstract buildContinueStep(): Awaitable<ReductionAction>;
   protected abstract buildDiscardStep(): Awaitable<ReductionAction>;
-}
-
-/* A ReductionStage that only ever has a single step */
-export abstract class OneShotReductionStage extends ReductionStage {
-  private didRun = false;
-
-  public override canContinue(): boolean {
-    return !this.didRun;
-  }
-
-  public override canDiscard(): boolean {
-    return this.didRun;
-  }
-
-  public override async continue(): Promise<void> {
-    await super.continue();
-    this.didRun = true;
-  }
-
-  protected override buildDiscardStep(): Awaitable<ReductionAction> {
-    let lastAction: Maybe<TypedReductionAction>;
-
-    return {
-      apply: async () => {
-        lastAction = this.getLastAction();
-        assert.equal(lastAction.type, "continue");
-        await lastAction.undo();
-      },
-      undo: async () => {
-        await lastAction?.apply();
-      },
-    };
-  }
 }
