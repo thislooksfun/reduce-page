@@ -8,10 +8,6 @@
   "packageRules": [
     {
       "matchDepTypes": ["dependencies"],
-      "rangeStrategy": "bump"
-    },
-    {
-      "matchDepTypes": ["dependencies"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "all non-major dependencies",
       "groupSlug": "prod-minor-patch"
