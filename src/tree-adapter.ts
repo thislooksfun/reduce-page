@@ -20,6 +20,12 @@ export interface BaseNode {
 export interface NodeWithChildren extends BaseNode {
   /** The node's children. */
   childNodes: ChildNode[];
+
+  /**
+   * Whether or not this node should be bypassed when walking the AST, going
+   * straight to its children instead.
+   */
+  bypassed: boolean;
 }
 
 export interface Document extends NodeWithChildren {
@@ -158,6 +164,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
       mode: html.DOCUMENT_MODE.NO_QUIRKS,
       childNodes: [],
       ignored: false,
+      bypassed: false,
     };
   },
 
@@ -166,6 +173,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
       nodeName: "#document-fragment",
       childNodes: [],
       ignored: false,
+      bypassed: false,
     };
   },
 
@@ -182,6 +190,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
       childNodes: [],
       parentNode: null,
       ignored: false,
+      bypassed: false,
     };
   },
 
@@ -312,7 +321,11 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
   },
 
   getChildNodes(node: ParentNode): ChildNode[] {
-    return node.childNodes.filter((c) => !c.ignored);
+    return node.childNodes
+      .filter((c) => !c.ignored)
+      .flatMap((c) =>
+        isParentNode(c) && c.bypassed ? this.getChildNodes(c) : c
+      );
   },
 
   getParentNode(node: ChildNode): null | ParentNode {
