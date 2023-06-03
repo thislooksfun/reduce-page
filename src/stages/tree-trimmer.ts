@@ -9,6 +9,7 @@ import { findChildOfType } from "../util.js";
 import { ReductionStage } from "./base.js";
 
 export class TreeTrimmerStage extends ReductionStage {
+  public override readonly title = "Remove Unnecessary Elements";
   private removalCandidateSets: Node[][] = [];
 
   constructor(document: Document) {

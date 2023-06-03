@@ -69,7 +69,9 @@ runloop: while (true) {
     case "c":
     case "n":
       if (reducer.canContinue()) {
-        logAction("Continuing");
+        logAction(
+          `Performing reduction step '${chalk.bold(reducer.stageTitle()!)}'`
+        );
         await reducer.continue();
         refresh();
       } else {

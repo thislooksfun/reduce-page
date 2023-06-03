@@ -12,6 +12,7 @@ export interface TypedReductionAction extends ReductionAction {
 }
 
 export abstract class ReductionStage implements Actionable {
+  public abstract readonly title: string;
   protected readonly document: Document;
   private history: TypedReductionAction[] = [];
 

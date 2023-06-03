@@ -18,6 +18,10 @@ export class PageReducer implements Actionable {
     // FIXME: Allow specifying which stages you want to run
   }
 
+  public stageTitle(): Maybe<string> {
+    return this.getActiveStage()?.title;
+  }
+
   public canContinue(): boolean {
     return !!this.getActiveStage()?.canContinue();
   }

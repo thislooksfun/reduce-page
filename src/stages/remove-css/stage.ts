@@ -14,6 +14,7 @@ import { extractHtml } from "./extractor.js";
 const htmlExtractor = { extensions: [".html"], extractor: extractHtml };
 
 export class RemoveUnusedCssStage extends OneShotReductionStage {
+  public override readonly title = "Remove Unused CSS";
   private pc = new PurgeCSS();
 
   protected override async buildContinueStep(): Promise<ReductionAction> {
