@@ -21,7 +21,6 @@ jobs:
           release-type: node
           package-name: reduce-page
           bump-minor-pre-major: true
-          bump-patch-for-minor-pre-major: true
           prerelease: true
 
   npm-publish:
