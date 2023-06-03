@@ -143,6 +143,10 @@ export function isElementNode(node: Node): node is Element {
   return Object.prototype.hasOwnProperty.call(node, "tagName");
 }
 
+export function isChildNode(node: Node): node is ChildNode {
+  return "parentNode" in node;
+}
+
 export function isParentNode(node: Node): node is ParentNode {
   return "childNodes" in node;
 }
@@ -329,7 +333,11 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
   },
 
   getParentNode(node: ChildNode): null | ParentNode {
-    return node.parentNode;
+    let parent = node.parentNode;
+    while (parent?.bypassed) {
+      parent = isChildNode(parent) ? parent.parentNode : null;
+    }
+    return parent;
   },
 
   getAttrList(element: Element): Token.Attribute[] {
