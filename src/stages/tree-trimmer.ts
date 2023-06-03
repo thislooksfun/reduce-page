@@ -4,7 +4,7 @@ import type { ReductionAction, TypedReductionAction } from "./base.js";
 
 import assert from "node:assert";
 
-import { isParentNode } from "../tree-adapter.js";
+import { isParentNode, treeAdapter } from "../tree-adapter.js";
 import { findChildOfType } from "../util.js";
 import { ReductionStage } from "./base.js";
 
@@ -19,15 +19,19 @@ export class TreeTrimmerStage extends ReductionStage {
     assert.ok(html);
 
     const head = findChildOfType("head", html);
-    if (head && head.childNodes.length > 0) {
-      this.removalCandidateSets.push(head.childNodes);
+    if (head) {
+      const children = treeAdapter.getChildNodes(head);
+      if (children.length > 0) {
+        this.removalCandidateSets.push(children);
+      }
     }
 
     const body = findChildOfType("body", html);
-    if (body && body.childNodes.length > 0) {
-      // TODO: Use `.toReversed()` after updating to Node v20
-      const children = [...body.childNodes];
-      this.removalCandidateSets.push(children.reverse());
+    if (body) {
+      const children = treeAdapter.getChildNodes(body);
+      if (children.length > 0) {
+        this.removalCandidateSets.push(children.reverse());
+      }
     }
   }
 
@@ -91,16 +95,17 @@ export class TreeTrimmerStage extends ReductionStage {
           };
         } else {
           const node = removalSet[0]!;
-          if (isParentNode(node) && node.childNodes.length > 0) {
-            // TODO: Use `.toReversed()` after updating to Node v20
-            const children = [...node.childNodes];
-            this.removalCandidateSets.push(children.reverse());
+          if (isParentNode(node)) {
+            const children = treeAdapter.getChildNodes(node);
+            if (children.length > 0) {
+              this.removalCandidateSets.push(children.reverse());
 
-            splitAction = {
-              undo: () => {
-                this.removalCandidateSets.pop();
-              },
-            };
+              splitAction = {
+                undo: () => {
+                  this.removalCandidateSets.pop();
+                },
+              };
+            }
           }
         }
       },
