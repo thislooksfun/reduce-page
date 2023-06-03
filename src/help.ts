@@ -34,7 +34,7 @@ export function buildHelp(): string {
     describeKey("u", `${uf("Undo")} the last action`),
     describeKey("s", `${uf("Save")} the current state to disk`),
     describeKey("r", `${uf("Refresh")} all connected browsers`),
-    describeKey("?", `Display this help`),
+    describeKeys(["h", "?"], `Display this help`),
     describeKey("q", `Save and ${uf("quit")}`),
   ].join("\n");
 }

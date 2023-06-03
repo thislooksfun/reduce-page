@@ -110,6 +110,7 @@ runloop: while (true) {
       stopKeyListener();
       await stopServer();
       break runloop;
+    case "h":
     case "/": // In case they don't hold shift
     case "?":
       console.log(`\n${buildHelp()}\n`);
