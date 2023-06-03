@@ -37,7 +37,9 @@ export class ReParentStage extends ReductionStage {
     const body = findChildOfType("body", html);
     if (body) {
       const bypassableChildren = bypassableChildrenOf(body);
-      this.removalCandidateSets.push(bypassableChildren.reverse());
+      if (bypassableChildren.length > 0) {
+        this.removalCandidateSets.push(bypassableChildren.reverse());
+      }
     }
   }
 
