@@ -40,13 +40,18 @@ export interface DocumentFragment extends NodeWithChildren {
   nodeName: "#document-fragment";
 }
 
+export interface Attribute extends Token.Attribute {
+  /** Whether or not the attribute should be ignored. */
+  ignored: boolean;
+}
+
 export interface Element extends NodeWithChildren {
   /** Element tag name. Same as {@link tagName}. */
   nodeName: string;
   /** Element tag name. Same as {@link nodeName}. */
   tagName: string;
   /** List of element attributes. */
-  attrs: Token.Attribute[];
+  attrs: Attribute[];
   /** Element namespace. */
   namespaceURI: html.NS;
   /** Parent node. */
@@ -160,6 +165,13 @@ export function createTextNode(value: string): TextNode {
   };
 }
 
+function mapAttribute(attribute: Token.Attribute): Attribute {
+  return {
+    ignored: false,
+    ...attribute,
+  };
+}
+
 export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
   // Node construction
   createDocument(): Document {
@@ -189,7 +201,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
     return {
       nodeName: tagName,
       tagName,
-      attrs: attributes,
+      attrs: attributes.map((attribute) => mapAttribute(attribute)),
       namespaceURI,
       childNodes: [],
       parentNode: null,
@@ -314,7 +326,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
 
     for (const attribute of attributes) {
       if (!recipientAttributesMap.has(attribute.name)) {
-        recipient.attrs.push(attribute);
+        recipient.attrs.push(mapAttribute(attribute));
       }
     }
   },
@@ -340,8 +352,8 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
     return parent;
   },
 
-  getAttrList(element: Element): Token.Attribute[] {
-    return element.attrs;
+  getAttrList(element: Element): Attribute[] {
+    return element.attrs.filter((attribute) => !attribute.ignored);
   },
 
   // Node data

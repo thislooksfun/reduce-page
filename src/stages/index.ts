@@ -1,4 +1,5 @@
 import { ReParentStage } from "./re-parent.js";
+import { RemoveAttributesStage } from "./remove-attributes.js";
 import { RemoveUnusedCssStage } from "./remove-css/stage.js";
 import { TreeTrimmerStage } from "./tree-trimmer.js";
 
@@ -9,7 +10,8 @@ export const allStages = [
   // Stage 2: Try removing intermediate elements
   ReParentStage,
 
-  // FIXME: Stage 3: Try removing attributes
+  // Stage 3: Try removing attributes
+  RemoveAttributesStage,
 
   // FIXME: Stage 4: Try removing classes
 
