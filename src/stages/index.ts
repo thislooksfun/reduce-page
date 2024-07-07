@@ -1,7 +1,7 @@
+import { RemoveUnusedCssStage } from "./purge-css/stage.js";
 import { ReParentStage } from "./re-parent.js";
 import { RemoveAttributesStage } from "./remove-attributes.js";
 import { RemoveClassesStage } from "./remove-classes.js";
-import { RemoveUnusedCssStage } from "./remove-css/stage.js";
 import { TreeTrimmerStage } from "./tree-trimmer.js";
 
 export const allStages = [
