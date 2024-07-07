@@ -22,7 +22,7 @@ function extractAttributes(node: Node): ElementAttribute[] {
 export class RemoveAttributesStage extends IgnorableSetBisectionReductionStage<ElementAttribute> {
   public override readonly title = "Remove Unnecessary Attributes";
 
-  protected override init() {
+  public override init() {
     const attributes = extractAttributes(this.document);
     this.tryAddCandidateSet(attributes);
   }

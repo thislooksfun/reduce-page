@@ -9,7 +9,7 @@ import { IgnorableSetBisectionReductionStage } from "./base/bisecting-ignorable.
 export class TreeTrimmerStage extends IgnorableSetBisectionReductionStage<Node> {
   public override readonly title = "Remove Unnecessary Elements";
 
-  protected override init() {
+  public override init() {
     const html = findChildOfType("html", this.document);
     assert.ok(html);
 

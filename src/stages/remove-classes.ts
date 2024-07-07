@@ -24,7 +24,7 @@ function extractClasses(node: Node): Class[] {
 export class RemoveClassesStage extends IgnorableSetBisectionReductionStage<Class> {
   public override readonly title = "Remove Unnecessary Classes";
 
-  protected override init() {
+  public override init() {
     const classes = extractClasses(this.document);
     this.tryAddCandidateSet(classes);
   }

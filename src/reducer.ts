@@ -18,16 +18,18 @@ export class PageReducer implements Actionable {
     // FIXME: Allow specifying which stages you want to run
   }
 
-  public stageTitle(): Maybe<string> {
-    return this.getActiveStage()?.title;
+  public async stageTitle(): Promise<Maybe<string>> {
+    const stage = await this.getActiveStage();
+    return stage?.title;
   }
 
-  public canContinue(): boolean {
-    return !!this.getActiveStage()?.canContinue();
+  public async canContinue(): Promise<boolean> {
+    const stage = await this.getActiveStage();
+    return !!stage?.canContinue();
   }
 
   public async continue(): Promise<void> {
-    const stage = this.getActiveStage();
+    const stage = await this.getActiveStage();
     assert.ok(stage);
     await stage.continue();
   }
@@ -64,7 +66,7 @@ export class PageReducer implements Actionable {
     return stringifyHTML(this.document);
   }
 
-  private getActiveStage(): Maybe<ReductionStage> {
+  private async getActiveStage(): Promise<Maybe<ReductionStage>> {
     let stage = this.history.at(-1);
     while (!stage?.canContinue()) {
       if (this.nextStage >= allStages.length) {
@@ -73,6 +75,7 @@ export class PageReducer implements Actionable {
 
       const stageClass = allStages[this.nextStage++]!;
       stage = new stageClass(this.document);
+      await stage.init();
       this.history.push(stage);
     }
 

@@ -7,7 +7,7 @@ export interface Undoable {
 }
 
 export interface Actionable extends Required<Undoable> {
-  canContinue: () => boolean;
+  canContinue: () => Awaitable<boolean>;
   continue: () => Awaitable<void>;
   canDiscard: () => boolean;
   discard: () => Awaitable<void>;

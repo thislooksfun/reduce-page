@@ -19,7 +19,7 @@ export abstract class OneShotReductionStage extends ReductionStage {
 
   protected abstract buildReduction(): Awaitable<ReductionAction>;
 
-  protected override init() {
+  public override init() {
     // One-shot reduction stages typically have no initialization.
   }
 

@@ -15,7 +15,7 @@ function bypassableChildrenOf(node: ParentNode) {
 export class ReParentStage extends SetBisectionReductionStage<ParentNode> {
   public override readonly title = "Re-Parent Elements";
 
-  protected override init() {
+  public override init() {
     const html = findChildOfType("html", this.document);
     assert.ok(html);
 

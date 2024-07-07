@@ -11,8 +11,9 @@ export abstract class ReductionStage implements Actionable {
 
   constructor(document: Document) {
     this.document = document;
-    this.init();
   }
+
+  public abstract init(): Awaitable<void>;
 
   public abstract canContinue(): boolean;
 
@@ -45,8 +46,6 @@ export abstract class ReductionStage implements Actionable {
     assert.ok(action);
     return action;
   }
-
-  protected abstract init(): void;
 
   protected abstract buildContinueStep(): Awaitable<ReductionAction>;
   protected abstract buildDiscardStep(): Awaitable<ReductionAction>;

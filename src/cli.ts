@@ -70,10 +70,9 @@ runloop: while (true) {
   switch (key) {
     case "c":
     case "n":
-      if (reducer.canContinue()) {
-        logAction(
-          `Performing reduction step '${chalk.bold(reducer.stageTitle()!)}'`
-        );
+      if (await reducer.canContinue()) {
+        const title = await reducer.stageTitle();
+        logAction(`Performing reduction step '${chalk.bold(title)}'`);
         await reducer.continue();
         refresh();
       } else {
