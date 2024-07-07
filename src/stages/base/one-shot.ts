@@ -19,6 +19,10 @@ export abstract class OneShotReductionStage extends ReductionStage {
 
   protected abstract buildReduction(): Awaitable<ReductionAction>;
 
+  protected override init() {
+    // One-shot reduction stages typically have no initialization.
+  }
+
   protected override async buildContinueStep(): Promise<ReductionAction> {
     const reduction = await this.buildReduction();
 

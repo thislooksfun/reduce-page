@@ -1,4 +1,4 @@
-import type { Class, Document, Node } from "../tree-adapter.js";
+import type { Class, Node } from "../tree-adapter.js";
 
 import { isClassList, isElementNode, isParentNode } from "../tree-adapter.js";
 import { IgnorableSetBisectionReductionStage } from "./base/bisecting-ignorable.js";
@@ -24,10 +24,8 @@ function extractClasses(node: Node): Class[] {
 export class RemoveClassesStage extends IgnorableSetBisectionReductionStage<Class> {
   public override readonly title = "Remove Unnecessary Classes";
 
-  constructor(document: Document) {
-    super(document);
-
-    const classes = extractClasses(document);
+  protected override init() {
+    const classes = extractClasses(this.document);
     this.tryAddCandidateSet(classes);
   }
 }

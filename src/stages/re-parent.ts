@@ -1,4 +1,4 @@
-import type { Document, ParentNode } from "../tree-adapter.js";
+import type { ParentNode } from "../tree-adapter.js";
 import type { ReductionResult } from "./base/bisecting-sets.js";
 
 import assert from "node:assert";
@@ -15,10 +15,8 @@ function bypassableChildrenOf(node: ParentNode) {
 export class ReParentStage extends SetBisectionReductionStage<ParentNode> {
   public override readonly title = "Re-Parent Elements";
 
-  constructor(document: Document) {
-    super(document);
-
-    const html = findChildOfType("html", document);
+  protected override init() {
+    const html = findChildOfType("html", this.document);
     assert.ok(html);
 
     const head = findChildOfType("head", html);

@@ -1,4 +1,4 @@
-import type { Document, Node } from "../tree-adapter.js";
+import type { Node } from "../tree-adapter.js";
 
 import assert from "node:assert";
 
@@ -9,10 +9,8 @@ import { IgnorableSetBisectionReductionStage } from "./base/bisecting-ignorable.
 export class TreeTrimmerStage extends IgnorableSetBisectionReductionStage<Node> {
   public override readonly title = "Remove Unnecessary Elements";
 
-  constructor(document: Document) {
-    super(document);
-
-    const html = findChildOfType("html", document);
+  protected override init() {
+    const html = findChildOfType("html", this.document);
     assert.ok(html);
 
     const head = findChildOfType("head", html);
