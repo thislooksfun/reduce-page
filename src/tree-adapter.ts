@@ -51,7 +51,7 @@ export interface Element extends NodeWithChildren {
   /** Element tag name. Same as {@link nodeName}. */
   tagName: string;
   /** List of element attributes. */
-  attrs: Attribute[];
+  attributes: Attribute[];
   /** Element namespace. */
   namespaceURI: html.NS;
   /** Parent node. */
@@ -196,12 +196,12 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
   createElement(
     tagName: string,
     namespaceURI: html.NS,
-    attributes: Token.Attribute[]
+    rawAttributes: Token.Attribute[]
   ): Element {
     return {
       nodeName: tagName,
       tagName,
-      attrs: attributes.map((attribute) => mapAttribute(attribute)),
+      attributes: rawAttributes.map((attribute) => mapAttribute(attribute)),
       namespaceURI,
       childNodes: [],
       parentNode: null,
@@ -321,12 +321,12 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
 
   adoptAttributes(recipient: Element, attributes: Token.Attribute[]): void {
     const recipientAttributesMap = new Set(
-      recipient.attrs.map((attribute) => attribute.name)
+      recipient.attributes.map((attribute) => attribute.name)
     );
 
     for (const attribute of attributes) {
       if (!recipientAttributesMap.has(attribute.name)) {
-        recipient.attrs.push(mapAttribute(attribute));
+        recipient.attributes.push(mapAttribute(attribute));
       }
     }
   },
@@ -353,7 +353,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
   },
 
   getAttrList(element: Element): Attribute[] {
-    return element.attrs.filter((attribute) => !attribute.ignored);
+    return element.attributes.filter((attribute) => !attribute.ignored);
   },
 
   // Node data

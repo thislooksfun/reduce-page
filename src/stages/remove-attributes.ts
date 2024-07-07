@@ -8,7 +8,7 @@ function extractAttributes(node: Node): Attribute[] {
   const attributes: Attribute[] = [];
 
   if (isElementNode(node)) {
-    attributes.push(...node.attrs);
+    attributes.push(...node.attributes);
   }
 
   if (isParentNode(node)) {
