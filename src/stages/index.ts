@@ -2,6 +2,7 @@ import { RemoveUnusedCssStage } from "./purge-css/stage.js";
 import { ReParentStage } from "./re-parent.js";
 import { RemoveAttributesStage } from "./remove-attributes.js";
 import { RemoveClassesStage } from "./remove-classes.js";
+import { RemoveCssStage } from "./remove-css.js";
 import { TreeTrimmerStage } from "./tree-trimmer.js";
 
 export const allStages = [
@@ -20,5 +21,6 @@ export const allStages = [
   // Stage 5: Remove all unused style
   RemoveUnusedCssStage,
 
-  // FIXME: Stage 6: Bisect-remove all unnecessary CSS
+  // Stage 6: Bisect-remove all unnecessary CSS
+  RemoveCssStage,
 ] as const;
