@@ -1,20 +1,18 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable unicorn/no-null */
 
+import type { Ignorable } from "./types.js";
 import type { Token, TreeAdapter, TreeAdapterTypeMap } from "parse5";
 
 import { html } from "parse5";
 
-export interface BaseNode {
+export interface BaseNode extends Ignorable {
   /** The name of the node. */
   nodeName: string;
   /**
    * Comment source code location info. Available if location info is enabled.
    */
   sourceCodeLocation?: Token.Location | null;
-
-  /** Whether or not the node should be ignored when walking the AST. */
-  ignored: boolean;
 }
 
 export interface NodeWithChildren extends BaseNode {
@@ -40,10 +38,7 @@ export interface DocumentFragment extends NodeWithChildren {
   nodeName: "#document-fragment";
 }
 
-export interface Attribute extends Token.Attribute {
-  /** Whether or not the attribute should be ignored. */
-  ignored: boolean;
-}
+export interface Attribute extends Token.Attribute, Ignorable {}
 
 export interface Element extends NodeWithChildren {
   /** Element tag name. Same as {@link tagName}. */

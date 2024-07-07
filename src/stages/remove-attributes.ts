@@ -1,8 +1,7 @@
 import type { Attribute, Document, Node } from "../tree-adapter.js";
-import type { ReductionResult } from "./base/bisecting-sets.js";
 
 import { isElementNode, isParentNode } from "../tree-adapter.js";
-import { SetBisectionReductionStage } from "./base/bisecting-sets.js";
+import { IgnorableSetBisectionReductionStage } from "./base/bisecting-ignorable.js";
 
 function extractAttributes(node: Node): Attribute[] {
   const attributes: Attribute[] = [];
@@ -20,7 +19,7 @@ function extractAttributes(node: Node): Attribute[] {
   return attributes;
 }
 
-export class RemoveAttributesStage extends SetBisectionReductionStage<Attribute> {
+export class RemoveAttributesStage extends IgnorableSetBisectionReductionStage<Attribute> {
   public override readonly title = "Remove Unnecessary Attributes";
 
   constructor(document: Document) {
@@ -28,27 +27,5 @@ export class RemoveAttributesStage extends SetBisectionReductionStage<Attribute>
 
     const attributes = extractAttributes(document);
     this.tryAddCandidateSet(attributes);
-  }
-
-  protected override reduceCandidates(
-    candidates: Attribute[]
-  ): ReductionResult<Attribute> {
-    for (const attribute of candidates) {
-      attribute.ignored = true;
-    }
-
-    return {
-      undo: () => {
-        for (const attribute of candidates) {
-          attribute.ignored = false;
-        }
-      },
-    };
-  }
-
-  protected override discardSingleCandidate(
-    _candidate: Attribute
-  ): Attribute[] {
-    return [];
   }
 }

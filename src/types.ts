@@ -13,3 +13,8 @@ export interface Actionable extends Required<Undoable> {
   discard: () => Awaitable<void>;
   canUndo: () => boolean;
 }
+
+export interface Ignorable {
+  /** Whether or not this item is ignored. */
+  ignored: boolean;
+}
