@@ -40,13 +40,25 @@ export interface DocumentFragment extends NodeWithChildren {
 
 export interface Attribute extends Token.Attribute, Ignorable {}
 
+export interface Class extends Ignorable {
+  /** The name of the class. */
+  name: string;
+}
+
+export interface ClassList extends Omit<Attribute, "name" | "value"> {
+  name: "class";
+  values: Class[];
+}
+
+export type ElementAttribute = Attribute | ClassList;
+
 export interface Element extends NodeWithChildren {
   /** Element tag name. Same as {@link tagName}. */
   nodeName: string;
   /** Element tag name. Same as {@link nodeName}. */
   tagName: string;
   /** List of element attributes. */
-  attributes: Attribute[];
+  attributes: ElementAttribute[];
   /** Element namespace. */
   namespaceURI: html.NS;
   /** Parent node. */
@@ -151,6 +163,12 @@ export function isParentNode(node: Node): node is ParentNode {
   return "childNodes" in node;
 }
 
+export function isClassList(
+  attribute: ElementAttribute
+): attribute is ClassList {
+  return attribute.name === "class";
+}
+
 export function createTextNode(value: string): TextNode {
   return {
     nodeName: "#text",
@@ -160,7 +178,17 @@ export function createTextNode(value: string): TextNode {
   };
 }
 
-function mapAttribute(attribute: Token.Attribute): Attribute {
+function mapAttribute(attribute: Token.Attribute): ElementAttribute {
+  if (attribute.name === "class") {
+    const classNames = attribute.value.split(" ");
+    return {
+      ignored: false,
+      ...attribute,
+      name: "class", // This is necessary to make TS happy.
+      values: classNames.map((name) => ({ name, ignored: false })),
+    } satisfies ClassList;
+  }
+
   return {
     ignored: false,
     ...attribute,
@@ -347,8 +375,20 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
     return parent;
   },
 
-  getAttrList(element: Element): Attribute[] {
-    return element.attributes.filter((attribute) => !attribute.ignored);
+  getAttrList(element: Element): Token.Attribute[] {
+    return element.attributes
+      .filter((attribute) => !attribute.ignored)
+      .map((attribute) => {
+        if (isClassList(attribute)) {
+          const value = attribute.values
+            .filter((value) => !value.ignored)
+            .map((value) => value.name)
+            .join(" ");
+          return { ...attribute, value };
+        } else {
+          return attribute;
+        }
+      });
   },
 
   // Node data

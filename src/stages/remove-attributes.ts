@@ -1,10 +1,10 @@
-import type { Attribute, Document, Node } from "../tree-adapter.js";
+import type { Document, ElementAttribute, Node } from "../tree-adapter.js";
 
 import { isElementNode, isParentNode } from "../tree-adapter.js";
 import { IgnorableSetBisectionReductionStage } from "./base/bisecting-ignorable.js";
 
-function extractAttributes(node: Node): Attribute[] {
-  const attributes: Attribute[] = [];
+function extractAttributes(node: Node): ElementAttribute[] {
+  const attributes: ElementAttribute[] = [];
 
   if (isElementNode(node)) {
     attributes.push(...node.attributes);
@@ -19,7 +19,7 @@ function extractAttributes(node: Node): Attribute[] {
   return attributes;
 }
 
-export class RemoveAttributesStage extends IgnorableSetBisectionReductionStage<Attribute> {
+export class RemoveAttributesStage extends IgnorableSetBisectionReductionStage<ElementAttribute> {
   public override readonly title = "Remove Unnecessary Attributes";
 
   constructor(document: Document) {
