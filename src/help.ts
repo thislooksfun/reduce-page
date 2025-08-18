@@ -3,7 +3,7 @@ import chalk from "chalk";
 function describeKeys(keys: string[], description: string): string {
   const keyString = keys.join(",");
   return `  ${keyString}${" ".repeat(3 - keyString.length)}${chalk.grey(
-    " - " + description
+    " - " + description,
   )}`;
 }
 
@@ -22,14 +22,14 @@ export function buildHelp(): string {
     describeKeys(
       ["c", "n"],
       `Accept the last reduction and ${uf("continue")} to the ${uf(
-        "next"
-      )} reduction`
+        "next",
+      )} reduction`,
     ),
     describeKey(
       "d",
       `${uf(
-        "Discard"
-      )} the last reduction (undo it and try a different path next time)`
+        "Discard",
+      )} the last reduction (undo it and try a different path next time)`,
     ),
     describeKey("u", `${uf("Undo")} the last action`),
     describeKey("s", `${uf("Save")} the current state to disk`),

@@ -27,8 +27,8 @@ export class TreeTrimmerStage extends IgnorableSetBisectionReductionStage<Node> 
   }
 
   protected override discardSingleCandidate(candidate: Node): Node[] {
-    return isParentNode(candidate)
-      ? treeAdapter.getChildNodes(candidate).reverse()
+    return isParentNode(candidate) ?
+        treeAdapter.getChildNodes(candidate).reverse()
       : [];
   }
 }

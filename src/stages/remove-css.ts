@@ -45,7 +45,7 @@ export class RemoveCssStage extends SetBisectionReductionStage<CSSChildNode> {
       if (!isElementNode(node)) return;
 
       const styleAttribute = node.attributes.find(
-        (attribute) => attribute.name === "style"
+        (attribute) => attribute.name === "style",
       );
       if (!styleAttribute) return;
       // This shouldn't be possible, but it makes TS happy to check.
@@ -60,7 +60,7 @@ export class RemoveCssStage extends SetBisectionReductionStage<CSSChildNode> {
   }
 
   protected override reduceCandidates(
-    candidates: CSSChildNode[]
+    candidates: CSSChildNode[],
   ): ReductionResult<CSSChildNode> {
     const undoFns: Array<() => void> = [];
     for (const candidate of candidates) {
@@ -95,7 +95,7 @@ export class RemoveCssStage extends SetBisectionReductionStage<CSSChildNode> {
   }
 
   protected override discardSingleCandidate(
-    candidate: CSSChildNode
+    candidate: CSSChildNode,
   ): CSSChildNode[] {
     if (!isCSSContainer(candidate)) return [];
     return candidate.nodes ?? [];
@@ -105,7 +105,7 @@ export class RemoveCssStage extends SetBisectionReductionStage<CSSChildNode> {
     for (const source of this.sources) {
       if (source.type === "attribute") {
         const attribute = source.element.attributes.find(
-          (attribute) => attribute.name === "style"
+          (attribute) => attribute.name === "style",
         );
         assert.ok(attribute && !isClassList(attribute));
         attribute.value = source.css.toResult().toString();

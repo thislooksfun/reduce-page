@@ -24,7 +24,7 @@ export interface ReductionResult<CandidateType> extends Undoable {
 // skip that extra attempt. It's not necessary for correctness, but it would be
 // a nice QoL enhancement.
 export abstract class SetBisectionReductionStage<
-  CandidateType
+  CandidateType,
 > extends ReductionStage {
   private candidateSets: CandidateType[][] = [];
 
@@ -34,7 +34,7 @@ export abstract class SetBisectionReductionStage<
 
   /** Apply the reduction step to the given set of candidates. */
   protected abstract reduceCandidates(
-    candidates: CandidateType[]
+    candidates: CandidateType[],
   ): ReductionResult<CandidateType>;
 
   override buildContinueStep(): ReductionAction {
@@ -50,7 +50,7 @@ export abstract class SetBisectionReductionStage<
 
         if (reductionAction.newCandidates) {
           addCandidatesAction = this.tryAddCandidateSet(
-            reductionAction.newCandidates
+            reductionAction.newCandidates,
           );
         }
       },
@@ -68,7 +68,7 @@ export abstract class SetBisectionReductionStage<
   }
 
   protected abstract discardSingleCandidate(
-    candidate: CandidateType
+    candidate: CandidateType,
   ): CandidateType[];
 
   override async buildDiscardStep(): Promise<ReductionAction> {

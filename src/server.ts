@@ -29,7 +29,7 @@ export async function startServer(pageBuilder: () => string) {
   app.get("/", (_request, response) => {
     const body = pageBuilder().replace(
       "<head>",
-      `<head><script src="//localhost:${liveReloadPort}/livereload.js?snipver=1"></script>`
+      `<head><script src="//localhost:${liveReloadPort}/livereload.js?snipver=1"></script>`,
     );
 
     response.set("content-type", "text/html");

@@ -111,18 +111,13 @@ export type ChildNode =
   | DocumentType;
 export type Node = ParentNode | ChildNode;
 
-export type NodeFromName<NodeName extends string> = NodeName extends "#comment"
-  ? CommentNode
-  : NodeName extends "#document-fragment"
-  ? DocumentFragment
-  : NodeName extends "#document"
-  ? Document
-  : NodeName extends "#documentType"
-  ? DocumentType
-  : NodeName extends "#text"
-  ? TextNode
-  : NodeName extends "template"
-  ? Template
+export type NodeFromName<NodeName extends string> =
+  NodeName extends "#comment" ? CommentNode
+  : NodeName extends "#document-fragment" ? DocumentFragment
+  : NodeName extends "#document" ? Document
+  : NodeName extends "#documentType" ? DocumentType
+  : NodeName extends "#text" ? TextNode
+  : NodeName extends "template" ? Template
   : Element;
 
 export type TreeAdapterMap = TreeAdapterTypeMap<
@@ -163,7 +158,7 @@ export function isParentNode(node: Node): node is ParentNode {
 }
 
 export function isClassList(
-  attribute: ElementAttribute
+  attribute: ElementAttribute,
 ): attribute is ClassList {
   return attribute.name === "class";
 }
@@ -209,7 +204,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
   createElement(
     tagName: string,
     namespaceURI: html.NS,
-    rawAttributes: Token.Attribute[]
+    rawAttributes: Token.Attribute[],
   ): Element {
     return {
       nodeName: tagName,
@@ -250,7 +245,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
   insertBefore(
     parentNode: ParentNode,
     newNode: ChildNode,
-    referenceNode: ChildNode
+    referenceNode: ChildNode,
   ): void {
     const insertionIndex = parentNode.childNodes.indexOf(referenceNode);
 
@@ -260,7 +255,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
 
   setTemplateContent(
     templateElement: Template,
-    contentElement: DocumentFragment
+    contentElement: DocumentFragment,
   ): void {
     templateElement.content = contentElement;
   },
@@ -273,10 +268,10 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
     document: Document,
     name: string,
     publicId: string,
-    systemId: string
+    systemId: string,
   ): void {
     const doctypeNode = document.childNodes.find(
-      (node): node is DocumentType => node.nodeName === "#documentType"
+      (node): node is DocumentType => node.nodeName === "#documentType",
     );
 
     if (doctypeNode) {
@@ -329,7 +324,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
   insertTextBefore(
     parentNode: ParentNode,
     text: string,
-    referenceNode: ChildNode
+    referenceNode: ChildNode,
   ): void {
     const previousNode =
       parentNode.childNodes[parentNode.childNodes.indexOf(referenceNode) - 1];
@@ -340,14 +335,14 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
       treeAdapter.insertBefore(
         parentNode,
         this.createTextNode(text),
-        referenceNode
+        referenceNode,
       );
     }
   },
 
   adoptAttributes(recipient: Element, attributes: Token.Attribute[]): void {
     const recipientAttributesMap = new Set(
-      recipient.attributes.map((attribute) => attribute.name)
+      recipient.attributes.map((attribute) => attribute.name),
     );
 
     for (const attribute of attributes) {
@@ -366,7 +361,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
     return node.childNodes
       .filter((c) => !c.ignored)
       .flatMap((c) =>
-        isParentNode(c) && c.bypassed ? this.getChildNodes(c) : c
+        isParentNode(c) && c.bypassed ? this.getChildNodes(c) : c,
       );
   },
 
@@ -432,20 +427,20 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
   // Source code location
   setNodeSourceCodeLocation(
     node: Node,
-    location: Token.ElementLocation | null
+    location: Token.ElementLocation | null,
   ): void {
     node.sourceCodeLocation = location;
   },
 
   getNodeSourceCodeLocation(
-    node: Node
+    node: Node,
   ): Token.ElementLocation | undefined | null {
     return node.sourceCodeLocation;
   },
 
   updateNodeSourceCodeLocation(
     node: Node,
-    endLocation: Token.ElementLocation
+    endLocation: Token.ElementLocation,
   ): void {
     node.sourceCodeLocation = { ...node.sourceCodeLocation, ...endLocation };
   },
