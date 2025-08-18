@@ -7,10 +7,10 @@
 
     // enable latest features
     "lib": ["esnext"],
-    "module": "esnext",
-    "target": "esnext",
+    "module": "NodeNext",
+    "target": "ESNext",
 
-    "moduleResolution": "nodenext",
+    "moduleResolution": "NodeNext",
 
     "allowJs": true, // allow importing `.js` from `.ts`
     "esModuleInterop": true, // allow default imports for CommonJS modules
