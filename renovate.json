@@ -16,6 +16,11 @@
       "groupSlug": "dev-minor-patch",
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "description": "Exclude TypeScript from the dev dep group because it doesn't really follow semver",
+      "groupName": null,
+      "matchDepNames": ["typescript"]
     }
   ],
   "rollbackPrs": true,
