@@ -1,8 +1,13 @@
 {
-  "include": ["src/**/*"],
+  "include": ["**/*"],
   "exclude": ["node_modules/*", "dist/*"],
   "compilerOptions": {
-    "rootDir": "src",
+    // This root-level config is used for typechecking the entire project, and
+    // thus includes files that should not be in the final build. For the final
+    // build settings, see `tsconfig.build.json`.
+    "noEmit": true,
+
+    "rootDir": ".",
     "outDir": "dist",
 
     // enable latest features

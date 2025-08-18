@@ -12,7 +12,7 @@
   "scripts": {
     "prepare": "is-ci || husky install",
     "dev": "ts-node src/cli.ts",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "clean": "del-cli wm",
     "lint": "npm run lint:check",
