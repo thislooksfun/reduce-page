@@ -10,12 +10,7 @@ import type { Awaitable, Maybe } from "./types.js";
 import { parse, serialize } from "parse5";
 import stripBom from "strip-bom";
 
-import {
-  createTextNode,
-  isParentNode,
-  isTextNode,
-  treeAdapter,
-} from "./tree-adapter.js";
+import { isParentNode, isTextNode, treeAdapter } from "./tree-adapter.js";
 
 export function parseHTML(input: string): Document {
   return parse(stripBom(input), { treeAdapter });
@@ -99,5 +94,5 @@ export function setInnerText(element: Element, text: string): void {
     throw new Error("Trying to override text inside a non text parent node");
   }
 
-  element.childNodes = [createTextNode(text)];
+  element.childNodes = [treeAdapter.createTextNode(text)];
 }
