@@ -52,7 +52,7 @@
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jest": "27.9.0",
     "eslint-plugin-prettier": "4.2.5",
-    "eslint-plugin-promise": "6.6.0",
+    "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "eslint-plugin-unicorn": "56.0.1",
     "fast-check": "3.23.2",
