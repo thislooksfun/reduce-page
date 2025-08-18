@@ -54,10 +54,6 @@ rules:
   unicorn/filename-case:
     - error
     - case: kebabCase
-  # The node: protocol is only supported in node 16+, and snoots currently
-  # supports node 14+. Once node 14 support has been dropped this rule should be
-  # re-enabled.
-  unicorn/prefer-node-protocol: "off"
   unicorn/prevent-abbreviations:
     - error
     - replacements:
