@@ -169,15 +169,6 @@ export function isClassList(
   return attribute.name === "class";
 }
 
-export function createTextNode(value: string): TextNode {
-  return {
-    nodeName: "#text",
-    value,
-    parentNode: null,
-    ignored: false,
-  };
-}
-
 function mapAttribute(attribute: Token.Attribute): ElementAttribute {
   if (attribute.name === "class") {
     const classNames = attribute.value.split(" ");
@@ -237,6 +228,15 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
     return {
       nodeName: "#comment",
       data,
+      parentNode: null,
+      ignored: false,
+    };
+  },
+
+  createTextNode(value: string): TextNode {
+    return {
+      nodeName: "#text",
+      value,
       parentNode: null,
       ignored: false,
     };
@@ -324,7 +324,7 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
       }
     }
 
-    treeAdapter.appendChild(parentNode, createTextNode(text));
+    treeAdapter.appendChild(parentNode, this.createTextNode(text));
   },
 
   insertTextBefore(
@@ -338,7 +338,11 @@ export const treeAdapter: TreeAdapter<TreeAdapterMap> = {
     if (previousNode && treeAdapter.isTextNode(previousNode)) {
       previousNode.value += text;
     } else {
-      treeAdapter.insertBefore(parentNode, createTextNode(text), referenceNode);
+      treeAdapter.insertBefore(
+        parentNode,
+        this.createTextNode(text),
+        referenceNode
+      );
     }
   },
 
