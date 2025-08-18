@@ -6,6 +6,9 @@
   "type": "module",
   "author": "thislooksfun <tlf@thislooks.fun> (https://thislooks.fun)",
   "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "prepare": "is-ci || husky install",
     "dev": "ts-node src/cli.ts",
