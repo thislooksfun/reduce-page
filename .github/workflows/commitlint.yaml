@@ -4,9 +4,20 @@ on: [pull_request]
 
 jobs:
   commitlint:
+    name: Lint Commit Messages
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: wagoid/commitlint-github-action@v5
+          # Get the minimum data needed to be able to check the commit
+          # messages. For details on how the `tree:0` filter works, see:
+          # https://github.blog/open-source/git/get-up-to-speed-with-partial-clone-and-shallow-clone/
+          filter: tree:0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx --no -- commitlint --from origin/${{ github.base_ref }} --to origin/${{ github.head_ref }}
