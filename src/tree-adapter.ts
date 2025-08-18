@@ -147,7 +147,6 @@ export function isCommentNode(node: Node): node is CommentNode {
 }
 
 export function isDocumentTypeNode(node: Node): node is DocumentType {
-  // eslint-disable-next-line sonarjs/no-duplicate-string
   return node.nodeName === "#documentType";
 }
 

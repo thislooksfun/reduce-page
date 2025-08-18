@@ -12,7 +12,6 @@ plugins:
   - import
   - promise
   - simple-import-sort
-  - sonarjs
   - unicorn
 
 extends:
@@ -20,7 +19,6 @@ extends:
   - plugin:comment-length/recommended
   - plugin:eslint-comments/recommended
   - plugin:import/recommended
-  - plugin:sonarjs/recommended
   - plugin:unicorn/recommended
   - plugin:prettier/recommended
 
@@ -105,4 +103,3 @@ overrides:
         - assertFunctionNames:
             - expect
             - n.done
-      sonarjs/no-duplicate-string: off
