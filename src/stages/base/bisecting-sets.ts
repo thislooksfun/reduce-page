@@ -9,6 +9,20 @@ export interface ReductionResult<CandidateType> extends Undoable {
   newCandidates?: CandidateType[];
 }
 
+// TODO: Make this smarter. Currently it's incredibly naïve, which also means
+// that it is more annoying to use than necessary. Take the following example of
+// how it works currently. Let's say 'b' is necessary to keep:
+// 1. Add some candidate set [a,b]
+// 2. Reduce the set [a,b] (removing both) -- this breaks because b is necessary
+// 3. Discard that attempt, splitting the set into two: [a] and [b]
+// 4. Reduce the set [a], leaving b alone -- a is not required, so this is fine
+// Now at this point we know conclusively that b is the problem and needs to
+// stay. a is gone, and we already tried removing them both back in step 1. But
+// the current logic tries removing a anyway, which is two extra steps (next +
+// discard) that the user has to perform.
+// Ideally there would be some way of tracking this relationship, so that we can
+// skip that extra attempt. It's not necessary for correctness, but it would be
+// a nice QoL enhancement.
 export abstract class SetBisectionReductionStage<
   CandidateType
 > extends ReductionStage {

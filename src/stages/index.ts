@@ -23,4 +23,8 @@ export const allStages = [
 
   // Stage 6: Bisect-remove all unnecessary CSS
   RemoveCssStage,
+
+  // TODO: stage 7: consolidate CSS selectors (i.e. if we get down to a single
+  //                `div` with 20 classes, join them into one class)
+  // TODO: repeat stages until no changes are made?
 ] as const;

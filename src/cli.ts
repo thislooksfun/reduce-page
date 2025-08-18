@@ -74,6 +74,11 @@ runloop: while (true) {
         const title = await reducer.stageTitle();
         logAction(`Performing reduction step '${chalk.bold(title)}'`);
         await reducer.continue();
+        // TODO: Log a short description of what happened?
+        //       e.g. "Removed X elements"
+
+        // TODO: Log an estimate of remaining work?
+        //       e.g. "x sets containing y elements"
         refresh();
       } else {
         logSuccess("Reduction finished!");
@@ -85,6 +90,7 @@ runloop: while (true) {
         await reducer.discard();
         refresh();
       } else {
+        // TODO: Better message (tell them to undo?)
         logError("Can't discard");
       }
       break;
@@ -119,4 +125,7 @@ runloop: while (true) {
     default:
       logError(`Unsupported command '${chalk.bold(key)}', ${helpPrompt}`);
   }
+
+  // TODO: Add this as an option? (maybe Autosave)?
+  // await saveReduction();
 }
