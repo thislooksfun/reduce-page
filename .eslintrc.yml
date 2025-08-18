@@ -54,6 +54,7 @@ rules:
   unicorn/filename-case:
     - error
     - case: kebabCase
+  unicorn/import-style: "off"
   unicorn/prevent-abbreviations:
     - error
     - replacements:
