@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "configMigration": true,
-  "extends": ["config:js-lib", ":rebaseStalePrs"],
+  "extends": ["config:js-app", ":rebaseStalePrs"],
   "internalChecksFilter": "strict",
   "minimumReleaseAge": "3 days",
   "packageRules": [
