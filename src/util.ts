@@ -22,7 +22,7 @@ export function stringifyHTML(document: Document): string {
 
 export async function visitDescendants(
   node: ParentNode,
-  visit: (node: Node) => Awaitable<void>
+  visit: (node: Node) => Awaitable<void>,
 ): Promise<void> {
   for (const childNode of node.childNodes) {
     await visit(childNode);
@@ -34,11 +34,11 @@ export async function visitDescendants(
 
 export async function visitDescendantsOfType<
   NodeName extends string,
-  NodeType = NodeFromName<NodeName>
+  NodeType = NodeFromName<NodeName>,
 >(
   type: NodeName,
   node: ParentNode,
-  visit: (node: NodeType) => Awaitable<void>
+  visit: (node: NodeType) => Awaitable<void>,
 ): Promise<void> {
   await visitDescendants(node, async (visitedNode) => {
     if (visitedNode.nodeName === type) {
@@ -49,7 +49,7 @@ export async function visitDescendantsOfType<
 
 export async function findDescendantsOfType<
   NodeName extends string,
-  NodeType = NodeFromName<NodeName>
+  NodeType = NodeFromName<NodeName>,
 >(type: NodeName, node: ParentNode): Promise<NodeType[]> {
   const nodes: NodeType[] = [];
   await visitDescendantsOfType<NodeName, NodeType>(type, node, (foundNode) => {
@@ -60,7 +60,7 @@ export async function findDescendantsOfType<
 
 export function findChildOfType<
   NodeName extends string,
-  NodeType = NodeFromName<NodeName>
+  NodeType = NodeFromName<NodeName>,
 >(name: NodeName, node: ParentNode): Maybe<NodeType> {
   const match = node.childNodes.find((c) => c.nodeName === name);
   return match as Maybe<NodeType>;
@@ -79,7 +79,7 @@ export function getInnerText(element: Element): string {
   for (const childNode of element.childNodes) {
     if (!isTextNode(childNode)) {
       throw new Error(
-        `Invalid child type encountered. Expected '#text', got '${childNode.nodeName}'`
+        `Invalid child type encountered. Expected '#text', got '${childNode.nodeName}'`,
       );
     }
 

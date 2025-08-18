@@ -7,10 +7,10 @@ export interface ReductionResult<CandidateType> extends Undoable {
 }
 
 export abstract class IgnorableSetBisectionReductionStage<
-  CandidateType extends Ignorable
+  CandidateType extends Ignorable,
 > extends SetBisectionReductionStage<CandidateType> {
   protected override reduceCandidates(
-    candidates: CandidateType[]
+    candidates: CandidateType[],
   ): ReductionResult<CandidateType> {
     for (const candidate of candidates) {
       candidate.ignored = true;
@@ -26,7 +26,7 @@ export abstract class IgnorableSetBisectionReductionStage<
   }
 
   protected override discardSingleCandidate(
-    _candidate: CandidateType
+    _candidate: CandidateType,
   ): CandidateType[] {
     return [];
   }

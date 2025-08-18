@@ -23,7 +23,7 @@ export class ReParentStage extends SetBisectionReductionStage<ParentNode> {
     if (head) {
       const bypassableChildren = bypassableChildrenOf(head).filter(
         // Don't mess with head elements that just have text contents.
-        (element) => !["script", "style", "title"].includes(element.nodeName)
+        (element) => !["script", "style", "title"].includes(element.nodeName),
       );
       this.tryAddCandidateSet(bypassableChildren);
     }
@@ -36,7 +36,7 @@ export class ReParentStage extends SetBisectionReductionStage<ParentNode> {
   }
 
   protected override reduceCandidates(
-    candidates: ParentNode[]
+    candidates: ParentNode[],
   ): ReductionResult<ParentNode> {
     let nextLayer: ParentNode[] = [];
     for (const node of candidates) {
@@ -55,7 +55,7 @@ export class ReParentStage extends SetBisectionReductionStage<ParentNode> {
   }
 
   protected override discardSingleCandidate(
-    candidate: ParentNode
+    candidate: ParentNode,
   ): ParentNode[] {
     return bypassableChildrenOf(candidate).reverse();
   }

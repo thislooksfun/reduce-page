@@ -27,7 +27,7 @@ const makeEmptyResult = (): ExtractorResultDetailed => ({
 
 const mergedExtractorResults = (
   resultLeft: ExtractorResultDetailed,
-  resultRight: ExtractorResultDetailed
+  resultRight: ExtractorResultDetailed,
 ): ExtractorResultDetailed => {
   return {
     attributes: {

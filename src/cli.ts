@@ -48,7 +48,7 @@ async function saveReduction() {
 
 const { refresh, stopServer } = await startServer(() => reducer.stringify());
 console.log(
-  chalk.yellow(`Reduction server listening at ${chalk.bold("localhost:3000")}`)
+  chalk.yellow(`Reduction server listening at ${chalk.bold("localhost:3000")}`),
 );
 
 let isFirst = true;
