@@ -10,7 +10,7 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "prepare": "is-ci || husky install",
+    "prepare": "is-ci || husky",
     "dev": "ts-node src/cli.ts",
     "build": "tsc --project tsconfig.build.json",
     "typecheck": "tsc --noEmit",
@@ -56,7 +56,7 @@
     "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-unicorn": "56.0.1",
-    "husky": "8.0.3",
+    "husky": "9.1.7",
     "is-ci": "4.1.0",
     "lint-staged": "13.3.0",
     "nock": "13.5.6",
