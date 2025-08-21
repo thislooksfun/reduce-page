@@ -3,7 +3,7 @@ import type { Document, Element, ParentNode } from "../../tree-adapter.js";
 import { isParentNode, treeAdapter } from "../../tree-adapter.js";
 import { parseHTML } from "../../util.js";
 
-export type ExtractorResultDetailed = {
+export interface ExtractorResultDetailed {
   attributes: {
     names: string[];
     values: string[];
@@ -12,7 +12,7 @@ export type ExtractorResultDetailed = {
   ids: string[];
   tags: string[];
   undetermined: string[];
-};
+}
 
 const makeEmptyResult = (): ExtractorResultDetailed => ({
   attributes: {
