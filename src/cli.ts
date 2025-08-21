@@ -55,7 +55,7 @@ let isFirst = true;
 
 const helpPrompt = `press '${chalk.bold("h")}' for help`;
 
-// eslint-disable-next-line no-constant-condition
+// eslint-disable-next-line no-constant-condition, @typescript-eslint/no-unnecessary-condition
 runloop: while (true) {
   process.stdout.write(`What would you like to do? `);
 

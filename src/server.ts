@@ -9,7 +9,9 @@ const webPort = 3000;
 
 function startApp(app: Express, port: number): Promise<Server> {
   return new Promise((resolve) => {
-    const server = app.listen(port, () => resolve(server));
+    const server = app.listen(port, () => {
+      resolve(server);
+    });
   });
 }
 
@@ -39,7 +41,9 @@ export async function startServer(pageBuilder: () => string) {
   const server = await startApp(app, webPort);
 
   return {
-    refresh: () => liveReloadServer.refresh("/"),
+    refresh: () => {
+      liveReloadServer.refresh("/");
+    },
     stopServer: async () => {
       await stopServer(server);
       liveReloadServer.close();

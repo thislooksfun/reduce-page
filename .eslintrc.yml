@@ -66,15 +66,17 @@ overrides:
   - files: ["**/*.ts"]
     parser: "@typescript-eslint/parser"
     parserOptions:
-      project:
-        - "./tsconfig.json"
+      project: true
     plugins:
       - "@typescript-eslint"
     extends:
-      - plugin:@typescript-eslint/recommended
-      - plugin:@typescript-eslint/recommended-requiring-type-checking
+      - plugin:@typescript-eslint/strict-type-checked
+      - plugin:@typescript-eslint/stylistic-type-checked
       - plugin:import/typescript
     rules:
+      "@typescript-eslint/array-type":
+        - error
+        - default: array-simple
       "@typescript-eslint/consistent-type-exports": error
       "@typescript-eslint/consistent-type-imports": error
       "@typescript-eslint/naming-convention":
@@ -84,10 +86,17 @@ overrides:
         - selector: default
           format: [camelCase]
           leadingUnderscore: allow
-      "@typescript-eslint/no-explicit-any": error
       "@typescript-eslint/no-inferrable-types": "off"
       "@typescript-eslint/no-non-null-assertion": "off"
-      "@typescript-eslint/no-unused-vars": "off"
+      "@typescript-eslint/no-unused-vars":
+        - error
+        - args: all
+          argsIgnorePattern: ^_
+          caughtErrors: all
+          caughtErrorsIgnorePattern: ^_
+          destructuredArrayIgnorePattern: ^_
+          varsIgnorePattern: ^_
+          ignoreRestSiblings: true
       "@typescript-eslint/require-await": "off"
       # This is already covered by @typescript-eslint/no-this-alias.
       unicorn/no-this-assignment: "off"
