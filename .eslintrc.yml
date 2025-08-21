@@ -97,6 +97,12 @@ overrides:
           destructuredArrayIgnorePattern: ^_
           varsIgnorePattern: ^_
           ignoreRestSiblings: true
+      "@typescript-eslint/restrict-template-expressions":
+        - error
+        - allowAny: true
+          allowBoolean: true
+          allowNullish: true
+          allowNumber: true
       "@typescript-eslint/require-await": "off"
       # This is already covered by @typescript-eslint/no-this-alias.
       unicorn/no-this-assignment: "off"

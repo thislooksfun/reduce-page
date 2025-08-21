@@ -2,8 +2,6 @@
 // eslint-disable-next-line @eslint-community/eslint-comments/disable-enable-pair
 /* eslint-disable no-console */
 
-import type { FormatInputPathObject } from "node:path";
-
 import chalk from "chalk";
 import { readFile, writeFile } from "node:fs/promises";
 import { format, parse } from "node:path";
@@ -38,8 +36,7 @@ function logSuccess(message: string) {
 }
 
 async function saveReduction() {
-  const fileParts: FormatInputPathObject = parse(filepath);
-  delete fileParts.base;
+  const { base: _base, ...fileParts } = parse(filepath);
   fileParts.name += ".reduced";
   const outfile = format(fileParts);
   logAction(`Saving reduced page to ${chalk.bold(outfile)}`);
