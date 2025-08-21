@@ -11,7 +11,7 @@
   },
   "scripts": {
     "prepare": "is-ci || husky",
-    "dev": "ts-node src/cli.ts",
+    "dev": "tsx src/cli.ts",
     "build": "tsc --project tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "clean": "del-cli wm",
@@ -61,7 +61,7 @@
     "nock": "14.0.10",
     "npm-run-all2": "8.0.4",
     "prettier": "3.6.2",
-    "ts-node": "10.9.2",
+    "tsx": "4.20.4",
     "typescript": "5.9.2"
   },
   "keywords": []
