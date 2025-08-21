@@ -44,7 +44,7 @@
     "@types/node": "22.17.1",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-    "del-cli": "5.1.0",
+    "del-cli": "6.0.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-comment-length": "0.9.3",
