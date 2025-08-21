@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// eslint-disable-next-line eslint-comments/disable-enable-pair
+// eslint-disable-next-line @eslint-community/eslint-comments/disable-enable-pair
 /* eslint-disable no-console */
 
 import type { FormatInputPathObject } from "node:path";

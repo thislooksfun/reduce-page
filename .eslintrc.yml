@@ -8,7 +8,7 @@ reportUnusedDisableDirectives: true
 plugins:
   - comment-length
   - deprecation
-  - eslint-comments
+  - "@eslint-community/eslint-comments"
   - import
   - promise
   - simple-import-sort
@@ -17,7 +17,7 @@ plugins:
 extends:
   - eslint:recommended
   - plugin:comment-length/recommended
-  - plugin:eslint-comments/recommended
+  - plugin:@eslint-community/eslint-comments/recommended
   - plugin:import/recommended
   - plugin:unicorn/recommended
   - plugin:prettier/recommended
