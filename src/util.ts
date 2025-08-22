@@ -34,6 +34,7 @@ export async function visitDescendants(
 
 export async function visitDescendantsOfType<
   NodeName extends string,
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
   NodeType = NodeFromName<NodeName>,
 >(
   type: NodeName,

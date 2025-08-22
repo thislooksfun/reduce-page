@@ -19,7 +19,11 @@ function stopServer(server: Server): Promise<void> {
   return new Promise((resolve, reject) => {
     // eslint-disable-next-line promise/prefer-await-to-callbacks
     server.close((error) => {
-      error ? reject(error) : resolve();
+      if (error) {
+        reject(error);
+      } else {
+        resolve();
+      }
     });
   });
 }
@@ -47,7 +51,6 @@ export async function startServer(pageBuilder: () => string) {
     stopServer: async () => {
       await stopServer(server);
       liveReloadServer.close();
-      liveReloadServer.server;
     },
   };
 }
