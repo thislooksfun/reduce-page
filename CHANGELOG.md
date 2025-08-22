@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/thislooksfun/reduce-page/compare/reduce-page-v0.4.0...reduce-page-v0.4.1) (2025-08-22)
+
+
+### Bug Fixes
+
+* publish with provenance ([2407a7c](https://github.com/thislooksfun/reduce-page/commit/2407a7c67eeabc8f87c2a72de6d3390c16b8ee13))
+
 ## [0.4.0](https://github.com/thislooksfun/reduce-page/compare/reduce-page-v0.3.0...reduce-page-v0.4.0) (2025-08-22)
 
 
