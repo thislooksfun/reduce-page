@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/thislooksfun/reduce-page/compare/reduce-page-v0.4.1...reduce-page-v0.4.2) (2025-08-22)
+
+
+### Bug Fixes
+
+* add repository links to package.json ([496faf6](https://github.com/thislooksfun/reduce-page/commit/496faf6e2b3408b69ff32441ef9126ab10fe058d))
+
 ## [0.4.1](https://github.com/thislooksfun/reduce-page/compare/reduce-page-v0.4.0...reduce-page-v0.4.1) (2025-08-22)
 
 
