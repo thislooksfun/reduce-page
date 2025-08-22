@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.4.0](https://github.com/thislooksfun/reduce-page/compare/v0.3.0...v0.4.0) (2025-08-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop support for node 18
+
+### Features
+
+* add a class removal stage ([3d10a20](https://github.com/thislooksfun/reduce-page/commit/3d10a205948bab08441f709dacae1961c73745e0))
+* add a css bisection stage ([37adb97](https://github.com/thislooksfun/reduce-page/commit/37adb97146b73783e466cc2ac4b61ec14177db79))
+* add an attribute removal stage ([7af8c2f](https://github.com/thislooksfun/reduce-page/commit/7af8c2fea8fc72daff7d77fa5547d27267510bcc))
+* drop support for node 18 ([08f0f00](https://github.com/thislooksfun/reduce-page/commit/08f0f007a92b7115337fd335a9d5ead0e5e3bb14))
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([5102683](https://github.com/thislooksfun/reduce-page/commit/5102683a8007d83386fe91778995d5d4d00a35dc))
+* **deps:** update dependency chalk to v5.6.0 ([c2ee548](https://github.com/thislooksfun/reduce-page/commit/c2ee548fd1a922f715a72629cfa196ab3af54282))
+* **deps:** update dependency express to v4.20.0 [security] ([62de252](https://github.com/thislooksfun/reduce-page/commit/62de25200921c16e12f33da7b43f30d0da1ffd42))
+* **deps:** update dependency express to v4.21.2 ([2ce19cc](https://github.com/thislooksfun/reduce-page/commit/2ce19cce70ca236a601690a9cb011ef6c751d5cc))
+* **deps:** update dependency express to v5 ([c7127d6](https://github.com/thislooksfun/reduce-page/commit/c7127d61539a8e93d350f54cb56684e33e95c071))
+* **deps:** update dependency parse5 to v8 ([36c2ca6](https://github.com/thislooksfun/reduce-page/commit/36c2ca6525c2345a1b74bc544728b854c6d5bb3b))
+* **deps:** update dependency purgecss to v7 ([f1e0b6d](https://github.com/thislooksfun/reduce-page/commit/f1e0b6d36f3fadc0b554bd24df136244c66543d5))
+* specify node version range in package.json ([056f1f8](https://github.com/thislooksfun/reduce-page/commit/056f1f884e2f41de68b683dbf50fff6d1235f4d1))
+
 ## [0.3.0](https://github.com/thislooksfun/reduce-page/compare/v0.2.0...v0.3.0) (2023-06-03)
 
 
