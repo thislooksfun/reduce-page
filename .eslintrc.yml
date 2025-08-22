@@ -7,7 +7,6 @@ reportUnusedDisableDirectives: true
 
 plugins:
   - comment-length
-  - deprecation
   - "@eslint-community/eslint-comments"
   - import
   - promise
@@ -25,7 +24,6 @@ extends:
 rules:
   comment-length/limit-multi-line-comments: error
   comment-length/limit-single-line-comments: error
-  deprecation/deprecation: error
   import/first: error
   import/no-default-export: error
   import/no-duplicates: error
@@ -86,6 +84,7 @@ overrides:
         - selector: default
           format: [camelCase]
           leadingUnderscore: allow
+      "@typescript-eslint/no-deprecated": "warn"
       "@typescript-eslint/no-inferrable-types": "off"
       "@typescript-eslint/no-non-null-assertion": "off"
       "@typescript-eslint/no-unused-vars":
