@@ -5,7 +5,7 @@ import type { Actionable, Maybe } from "./types.js";
 import assert from "node:assert";
 
 import { allStages } from "./stages/index.js";
-import { parseHTML, stringifyHTML } from "./util.js";
+import { parseHTML, stringifyHTML } from "./utilities.js";
 
 export class PageReducer implements Actionable {
   private document: Document;

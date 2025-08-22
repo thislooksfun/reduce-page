@@ -1,7 +1,7 @@
 import type { Document, Element, ParentNode } from "../../tree-adapter.js";
 
 import { isParentNode, treeAdapter } from "../../tree-adapter.js";
-import { parseHTML } from "../../util.js";
+import { parseHTML } from "../../utilities.js";
 
 export interface ExtractorResultDetailed {
   attributes: {
