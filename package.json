@@ -17,10 +17,10 @@
     "clean": "del-cli wm",
     "lint": "npm run lint:check",
     "lint:check": "npm-run-all lint:check:*",
-    "lint:check:eslint": "eslint \"**/*.ts\"",
+    "lint:check:eslint": "eslint",
     "lint:check:prettier": "prettier --check \"**/*\"",
     "lint:fix": "npm-run-all lint:fix:*",
-    "lint:fix:eslint": "eslint --fix \"**/*.ts\"",
+    "lint:fix:eslint": "eslint --fix",
     "lint:fix:prettier": "prettier --write \"**/*\""
   },
   "dependencies": {
@@ -38,14 +38,13 @@
     "@commitlint/config-conventional": "19.8.1",
     "@commitlint/types": "19.8.1",
     "@eslint-community/eslint-plugin-eslint-comments": "4.5.0",
+    "@eslint/js": "9.33.0",
     "@types/debug": "4.1.12",
     "@types/express": "5.0.3",
     "@types/livereload": "0.9.5",
     "@types/node": "22.17.2",
-    "@typescript-eslint/eslint-plugin": "8.40.0",
-    "@typescript-eslint/parser": "8.40.0",
     "del-cli": "6.0.0",
-    "eslint": "8.57.1",
+    "eslint": "9.33.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-comment-length": "2.2.2",
     "eslint-plugin-import": "2.32.0",
@@ -54,6 +53,7 @@
     "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-unicorn": "56.0.1",
+    "globals": "16.3.0",
     "husky": "9.1.7",
     "is-ci": "4.1.0",
     "lint-staged": "16.1.5",
@@ -61,7 +61,8 @@
     "npm-run-all2": "8.0.4",
     "prettier": "3.6.2",
     "tsx": "4.20.4",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.40.0"
   },
   "keywords": []
 }
