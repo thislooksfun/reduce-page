@@ -4,7 +4,7 @@ import type { ReductionResult } from "./base/bisecting-sets.js";
 import assert from "node:assert";
 
 import { isParentNode, treeAdapter } from "../tree-adapter.js";
-import { findChildOfType } from "../util.js";
+import { findChildOfType } from "../utilities.js";
 import { SetBisectionReductionStage } from "./base/bisecting-sets.js";
 
 function bypassableChildrenOf(node: ParentNode) {
@@ -57,6 +57,6 @@ export class ReParentStage extends SetBisectionReductionStage<ParentNode> {
   protected override discardSingleCandidate(
     candidate: ParentNode,
   ): ParentNode[] {
-    return bypassableChildrenOf(candidate).reverse();
+    return bypassableChildrenOf(candidate).toReversed();
   }
 }

@@ -3,7 +3,7 @@ import type { Node } from "../tree-adapter.js";
 import assert from "node:assert";
 
 import { isParentNode, treeAdapter } from "../tree-adapter.js";
-import { findChildOfType } from "../util.js";
+import { findChildOfType } from "../utilities.js";
 import { IgnorableSetBisectionReductionStage } from "./base/bisecting-ignorable.js";
 
 export class TreeTrimmerStage extends IgnorableSetBisectionReductionStage<Node> {
@@ -22,13 +22,13 @@ export class TreeTrimmerStage extends IgnorableSetBisectionReductionStage<Node> 
     const body = findChildOfType("body", html);
     if (body) {
       const children = treeAdapter.getChildNodes(body);
-      this.tryAddCandidateSet(children.reverse());
+      this.tryAddCandidateSet(children.toReversed());
     }
   }
 
   protected override discardSingleCandidate(candidate: Node): Node[] {
     return isParentNode(candidate) ?
-        treeAdapter.getChildNodes(candidate).reverse()
+        treeAdapter.getChildNodes(candidate).toReversed()
       : [];
   }
 }

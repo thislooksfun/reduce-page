@@ -7,7 +7,7 @@ import {
   findDescendantsOfType,
   getInnerText,
   setInnerText,
-} from "../../util.js";
+} from "../../utilities.js";
 import { OneShotReductionStage } from "../base/one-shot.js";
 import { extractHtml } from "./extractor.js";
 

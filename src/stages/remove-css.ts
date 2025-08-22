@@ -15,7 +15,7 @@ import {
   findDescendantsOfType,
   getInnerText,
   visitDescendants,
-} from "../util.js";
+} from "../utilities.js";
 import { SetBisectionReductionStage } from "./base/bisecting-sets.js";
 
 interface StyleSource {
