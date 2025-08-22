@@ -8,20 +8,15 @@ name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
+    environment: release-please
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       prs: ${{ steps.release.outputs.prs }}
     steps:
       - id: release
-        uses: google-github-actions/release-please-action@v3
+        uses: googleapis/release-please-action@v4
         with:
-          release-type: node
-          package-name: reduce-page
-          bump-minor-pre-major: true
-          prerelease: true
+          token: ${{ secrets.RELEASE_PLEASE_GH_TOKEN }}
 
   npm-publish:
     runs-on: ubuntu-latest
