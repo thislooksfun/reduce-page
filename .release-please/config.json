@@ -4,6 +4,7 @@
   "bump-minor-pre-major": true,
   "packages": {
     ".": {
+      "package-name": "",
       "prerelease": true
     }
   }
