@@ -45,7 +45,7 @@
     "@types/debug": "4.1.12",
     "@types/express": "5.0.3",
     "@types/livereload": "0.9.5",
-    "@types/node": "22.18.1",
+    "@types/node": "22.18.5",
     "del-cli": "6.0.0",
     "eslint": "9.35.0",
     "eslint-config-prettier": "10.1.8",
@@ -65,7 +65,7 @@
     "prettier": "3.6.2",
     "tsx": "4.20.5",
     "typescript": "5.9.2",
-    "typescript-eslint": "8.43.0"
+    "typescript-eslint": "8.44.0"
   },
   "keywords": []
 }
