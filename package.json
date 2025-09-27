@@ -46,7 +46,7 @@
     "@types/express": "5.0.3",
     "@types/livereload": "0.9.5",
     "@types/node": "22.18.6",
-    "del-cli": "6.0.0",
+    "del-cli": "7.0.0",
     "eslint": "9.36.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-comment-length": "2.2.2",
