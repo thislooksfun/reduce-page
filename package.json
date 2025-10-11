@@ -41,13 +41,13 @@
     "@commitlint/config-conventional": "20.0.0",
     "@commitlint/types": "20.0.0",
     "@eslint-community/eslint-plugin-eslint-comments": "4.5.0",
-    "@eslint/js": "9.36.0",
+    "@eslint/js": "9.37.0",
     "@types/debug": "4.1.12",
     "@types/express": "5.0.3",
     "@types/livereload": "0.9.5",
     "@types/node": "22.18.8",
     "del-cli": "7.0.0",
-    "eslint": "9.36.0",
+    "eslint": "9.37.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-comment-length": "2.2.2",
     "eslint-plugin-import": "2.32.0",
@@ -65,7 +65,7 @@
     "prettier": "3.6.2",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.45.0"
+    "typescript-eslint": "8.46.0"
   },
   "keywords": []
 }
