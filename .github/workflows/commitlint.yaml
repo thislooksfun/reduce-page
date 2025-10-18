@@ -15,7 +15,7 @@ jobs:
           # https://github.blog/open-source/git/get-up-to-speed-with-partial-clone-and-shallow-clone/
           filter: tree:0
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
           cache: npm
