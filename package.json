@@ -45,7 +45,7 @@
     "@types/debug": "4.1.12",
     "@types/express": "5.0.3",
     "@types/livereload": "0.9.5",
-    "@types/node": "22.18.8",
+    "@types/node": "24.10.0",
     "del-cli": "7.0.0",
     "eslint": "9.37.0",
     "eslint-config-prettier": "10.1.8",
