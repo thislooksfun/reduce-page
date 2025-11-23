@@ -59,13 +59,13 @@
     "globals": "16.5.0",
     "husky": "9.1.7",
     "is-ci": "4.1.0",
-    "lint-staged": "16.2.6",
+    "lint-staged": "16.2.7",
     "nock": "14.0.10",
     "npm-run-all2": "8.0.4",
     "prettier": "3.6.2",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.46.4"
+    "typescript-eslint": "8.47.0"
   },
   "keywords": []
 }
