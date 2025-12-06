@@ -43,7 +43,7 @@
     "@eslint-community/eslint-plugin-eslint-comments": "4.5.0",
     "@eslint/js": "9.39.1",
     "@types/debug": "4.1.12",
-    "@types/express": "5.0.5",
+    "@types/express": "5.0.6",
     "@types/livereload": "0.9.5",
     "@types/node": "24.10.1",
     "del-cli": "7.0.0",
@@ -62,10 +62,10 @@
     "lint-staged": "16.2.7",
     "nock": "14.0.10",
     "npm-run-all2": "8.0.4",
-    "prettier": "3.6.2",
-    "tsx": "4.20.6",
+    "prettier": "3.7.4",
+    "tsx": "4.21.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.48.0"
+    "typescript-eslint": "8.48.1"
   },
   "keywords": []
 }
