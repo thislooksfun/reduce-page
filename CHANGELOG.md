@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.3](https://github.com/thislooksfun/reduce-page/compare/v0.4.2...v0.4.3) (2025-12-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency express to v5.2.1 ([f7c089a](https://github.com/thislooksfun/reduce-page/commit/f7c089a7764e267752bb02934b4a9dae3db38e94))
+
 ## [0.4.2](https://github.com/thislooksfun/reduce-page/compare/reduce-page-v0.4.1...reduce-page-v0.4.2) (2025-08-22)
 
 
